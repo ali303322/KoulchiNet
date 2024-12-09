@@ -27,6 +27,16 @@ export default function InscriptionClient() {
     });
     }
 
+    function validatePhoneNumber() {
+      const phoneRegex = /^(06|07)[0-9]{8}$/;
+      if (!phoneRegex.test(Téléphone)) {
+         SetIxeistError(true)
+         setMessageError("Veuillez entrer un numéro de téléphone valide (commençant par 06 ou 07 et 10 chiffres)."); 
+         return true;  
+      }
+      return false;
+      }
+
     const handleCaptchaChange = (value) => {
       if (value) {
         setCaptchaVerified(true);
@@ -54,6 +64,10 @@ export default function InscriptionClient() {
 
   const handleSubmit = async(e) => {
      e.preventDefault();
+     if (validatePhoneNumber()) {
+      scrollTop();
+        return
+     }
      if (MotPasse.length<8) {
       SetIxeistError(true)
       setMessageError(" Le mot de passe doit contenir au moins :8 caractères")
@@ -95,6 +109,10 @@ export default function InscriptionClient() {
         },   
       }
     ); 
+    const token = response.data.token;
+    localStorage.setItem('jwt_client', token);
+    Navigate('/ClientDashboard');
+    alert("Vérifiez votre e-mail pour le confirmer.")
     } catch (error) {
       if (error.response) {
         // Access the 'message' from the server response
@@ -109,8 +127,6 @@ export default function InscriptionClient() {
       return 
     }
 
-    Navigate('/ClientDashboard');
-    alert("Vérifiez votre e-mail pour le confirmer.")
     return;
     
   };

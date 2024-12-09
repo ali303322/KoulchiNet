@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 use App\Models\Client;
+use App\Models\HistoryClient;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    private $jwtSecret = 'your_secret_key';
     public function Register(Request $request)
     {
     
@@ -58,6 +61,7 @@ class ClientController extends Controller
             'email_verification_token'=>$token,
         ]);
  
+        $tokenjwt = $this->generateJWT($Client);
         try 
         {
             $clientEmail=Client::Where("email",$validatedData["email"])->get();
@@ -72,8 +76,11 @@ class ClientController extends Controller
              });
               
 
- 
-             return response()->json(["success"=>true,"message"=>"Please check your mail to reset  your password"],200);
+             return response()->json([
+                'message' => 'Please check your mail confirme it',
+                'token' => $token,
+            ], 201);
+             
          }
          else 
          {
@@ -84,7 +91,19 @@ class ClientController extends Controller
          return response()->json(["success"=>false,"message"=>$e->getMessage()],400);
         }
     }
+    private function generateJWT($user)
+    {
+        $payload = [
+            'iss' => "your_app_name", // Issuer of the token
+            'sub' => $user->id, // Subject (user ID)
+            'email' => $user->email,
+            'name' => $user->prenom . ' ' . $user->nom,
+            'iat' => time(), // Issued at
+            'exp' => time() + 3600, // Expiration (1 hour)
+        ];
 
+        return JWT::encode($payload, $this->jwtSecret, 'HS256');
+    }
 
     public function verfyEmail($email,$token)
     {
@@ -94,5 +113,37 @@ class ClientController extends Controller
             $client->save();
             return view("remerciepourverfication");
         }
+    }
+
+
+    public function CreateHistoriqueClient(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'type_service' => 'required|string|max:255',
+            'service' => 'required|string|max:255',
+            'date_sending_message' => 'required|date', 
+            'prestataire_id' => 'required', 
+        ]);
+
+
+        $historys = HistoryClient::create([
+            'name' => $validatedData['name'],
+            'type_service' => $validatedData['type_service'],
+            'date_sending_message' => $validatedData['date_sending_message'],
+            'service' => $validatedData['service'],
+            'prestataire_id' => $validatedData['prestataire_id'],
+        ]);
+    
+       
+        return response()->json($historys, 201); 
+    }
+
+
+
+    public function getHistoryClient()
+    {
+        $history=HistoryClient::All();
+        return response()->json($history);
     }
 }

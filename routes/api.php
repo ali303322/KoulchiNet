@@ -44,3 +44,12 @@ Route::get('verfy_email/{email}/{token}', [PrestataireController::class, 'verfyE
 //client
 Route::post('register_client', [ClientController::class, 'Register']);
 Route::get('verfy_email_client/{email}/{token}', [ClientController::class, 'verfyEmail']);
+//History prestataire
+Route::post('createHistoryPrestataireWithClient', [PrestataireController::class, 'CreateHistoriqueClient']);
+Route::get('getHistoryPrestataire', [PrestataireController::class, 'getHistoryPrestataire']);
+//History Client
+
+
+
+Route::post('createHistoryClientWithPrestataire', [ClientController::class, 'CreateHistoriqueClient']);
+Route::get('getHistoryClient', [ClientController::class, 'getHistoryClient']);

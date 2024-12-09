@@ -1,12 +1,22 @@
 // import React from 'react'
 
 // import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderPres from "./HeaderPres";
 import SideBarPres from "./SideBarPres";
+import axios from 'axios';
 
 
 export default function HistoriquePres() {
 
+  const [data,setData]=useState([]);
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/api/getHistoryPrestataire")
+    .then(res=>setData(res.data))
+    .catch(err=>console.log(err))
+  },[])
+
+  console.log(data);
   return (
     <div className="bg-gray-100 font-sans">
     <HeaderPres/>
@@ -37,14 +47,18 @@ export default function HistoriquePres() {
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4">Achraf Amrani</td>
-              <td className="py-3 px-4">27/10/2024 AT 16:15</td>
-              <td className="py-3 px-4">Chat</td>
+
+            {data.map((e,i)=>{
+              return<tr key={i} className="border-b border-gray-200">
+              <td className="py-3 px-4">{e.name}</td>
+              <td className="py-3 px-4">{e.date_sending_message}</td>
+              <td className="py-3 px-4">{e.type_service}</td>
               <td className="py-3 px-4">
-                <button className="text-red-500 hover:text-red-700">Delete</button>
+                <button className="text-blue-500 hover:text-blue-700">details</button>
               </td>
             </tr>
+            })}
+            
           </tbody>
         </table>
 

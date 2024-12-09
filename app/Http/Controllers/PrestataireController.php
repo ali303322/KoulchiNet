@@ -7,11 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Services;
+use App\Models\HistoryPrestataire;
 use App\Models\Document;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 class PrestataireController extends Controller
 {
+    private $jwtSecret = 'your_secret_key';
     public function index(Request $request)
     {
         // Get savedData from the headers
@@ -39,7 +43,7 @@ class PrestataireController extends Controller
             'ville' => 'required|string|max:255',
             'quartier' => 'required|string|max:255',
             'name_service' => 'required|string|max:100', 
-            'description_service' => 'required|string',
+            'description_service' => 'nullable|string',
             'annees_experience' => 'required|integer', 
             'statut' => 'required|string', 
             'disponibilite' => 'required|date', 
@@ -69,6 +73,7 @@ class PrestataireController extends Controller
             'disponibilite'=>$validatedData['disponibilite'],
             'email_verification_token'=>$token,
         ]);
+       
 
         $pres = Prestataire::where("email", $validatedData["email"])->first();
      
@@ -86,17 +91,17 @@ class PrestataireController extends Controller
 
         if ($request->hasFile('diplome')) {
             $Diplome = $request->file("diplome");
-            // Generate a unique filename to prevent overwriting
+           
             $DiplomeName = time() . '_' . $Diplome->getClientOriginalName();
-            // Move the file to the public directory
+            
             $Diplome->move(public_path("Diplomes"), $DiplomeName);
         }
  
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file("profile_photo");
-            // Generate a unique filename to prevent overwriting
+          
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            // Move the file to the public directory
+           
             $profilePhoto->move(public_path("profile_photos_perstataire"), $profilePhotoName);
         }
 
@@ -107,6 +112,8 @@ class PrestataireController extends Controller
             'diplome_sertificat' => $DiplomeName,
             'photo' => $profilePhotoName,
         ]);
+
+        $tokenjwt = $this->generateJWT($Prestataire);
         try 
         {
             $user=Prestataire::Where("email",$validatedData["email"])->get();
@@ -121,8 +128,11 @@ class PrestataireController extends Controller
              });
               
 
- 
-             return response()->json(["success"=>true,"message"=>"Please check your mail to reset  your password"],200);
+             return response()->json([
+                'message' => 'Please check your mail to reset  your password',
+                'token' => $tokenjwt,
+            ], 201);
+
          }
          else 
          {
@@ -135,6 +145,19 @@ class PrestataireController extends Controller
     }
 
 
+    private function generateJWT($user)
+    {
+        $payload = [
+            'iss' => "your_app_name", // Issuer of the token
+            'sub' => $user->id, // Subject (user ID)
+            'email' => $user->email,
+            'name' => $user->prenom . ' ' . $user->nom,
+            'iat' => time(), // Issued at
+            'exp' => time() + 3600, // Expiration (1 hour)
+        ];
+
+        return JWT::encode($payload, $this->jwtSecret, 'HS256');
+    }
     public function verfyEmail($email,$token)
     {
         $pres=Prestataire::Where("email",$email)->first();
@@ -143,5 +166,35 @@ class PrestataireController extends Controller
             $pres->save();
             return view("remerciepourverfication");
         }
+    }
+
+
+    public function CreateHistoriqueClient(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'type_service' => 'required|string|max:255',
+            'date_sending_message' => 'required|date', 
+            'client_id' => 'required', 
+        ]);
+
+
+        $historys = HistoryPrestataire::create([
+            'name' => $validatedData['name'],
+            'type_service' => $validatedData['type_service'],
+            'date_sending_message' => $validatedData['date_sending_message'],
+            'client_id' => $validatedData['client_id'],
+        ]);
+    
+       
+        return response()->json($historys, 201); 
+    }
+
+
+
+    public function getHistoryPrestataire()
+    {
+        $history=HistoryPrestataire::All();
+        return response()->json($history);
     }
 }

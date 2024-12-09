@@ -4,8 +4,17 @@ import { Link } from "react-router-dom";
 import HeaderClient from "./HeaderClient";
 // import SIdeBar from "./SIdeBar";
 import SideBarClient from "./SideBarClient";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HistoriqueClient() {
+
+  const[data,setData]=useState([]);
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/api/getHistoryClient")
+    .then(res=>setData(res.data))
+    .catch(err=>console.log(err))
+  })
   return (
     <div className="bg-gray-100 font-sans">
     <HeaderClient/>
@@ -34,15 +43,19 @@ export default function HistoriqueClient() {
             <tr className="bg-gray-50">
               <th className="text-left py-3 px-4 font-semibold text-gray-600">Nom</th>
               <th className="text-left py-3 px-4 font-semibold text-gray-600">Date</th>
-              <th className="text-left py-3 px-4 font-semibold text-gray-600">Status</th>
+              <th className="text-left py-3 px-4 font-semibold text-gray-600">service </th>
+              <th className="text-left py-3 px-4 font-semibold text-gray-600">type service</th>
               <th className="text-left py-3 px-4 font-semibold text-gray-600">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4">Achraf amrani</td>
-              <td className="py-3 px-4">27/10/2024 AT 16:15</td>
-              <td className="py-3 px-4">Chat</td>
+
+            {data.map((e,i)=>{
+              return             <tr className="border-b border-gray-200">
+              <td className="py-3 px-4">{e.name}</td>
+              <td className="py-3 px-4">{e.date_sending_message}</td>
+              <td className="py-3 px-4">{e.service}</td>
+              <td className="py-3 px-4">{e.type_service}</td>
               <td className="py-3 px-4 space-x-2">
                 <button className="text-[#4a69bd] hover:text-blue-700">
                   <Link to="/ClientDashboard/Review">Review</Link>
@@ -50,6 +63,8 @@ export default function HistoriqueClient() {
                 <button className="text-red-500 hover:text-red-700">Delete</button>
               </td>
             </tr>
+            })}
+
             {/* Repeat similar rows for other entries */}
           </tbody>
         </table>

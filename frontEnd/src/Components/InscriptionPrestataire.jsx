@@ -23,6 +23,21 @@ export default function InscriptionPrestataire() {
    const [PhotoProfel, setPhotoProfel] = useState(null);
     const[ExistError,SetIxeistError]=useState(false);
 
+
+
+    
+    function validatePhoneNumber() {
+      const phoneRegex = /^(06|07)[0-9]{8}$/;
+      if (!phoneRegex.test(Téléphone)) {
+         SetIxeistError(true)
+         setMessageError("Veuillez entrer un numéro de téléphone valide (commençant par 06 ou 07 et 10 chiffres)."); 
+         return true;  
+      }
+      return false;
+      }
+
+
+
     function scrollTop()
     {
       window.scrollTo({
@@ -58,6 +73,10 @@ export default function InscriptionPrestataire() {
 
   const handleSubmit = async(e) => {
      e.preventDefault();
+     if (validatePhoneNumber()) {
+      scrollTop();
+      return
+     }
      if (MotPasse.length<8) {
       SetIxeistError(true)
       setMessageError(" Le mot de passe doit contenir au moins :8 caractères")
@@ -66,7 +85,7 @@ export default function InscriptionPrestataire() {
     return
      }
     if (MotPasse!=ConMotPasse) {
-      SetIxeistError(true);
+        SetIxeistError(true);
         setMessageError("Le mot de passe et la confirmation du mot de passe ne correspondent pas. Veuillez vérifier et réessayer.");
         scrollTop
     }
@@ -100,25 +119,29 @@ export default function InscriptionPrestataire() {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json',
-        },   
-      }
-    ); 
+        },
+      });
+    
+      // Access the token from the response and store it
+      const token = response.data.token;
+    
+      // Optionally store the token in localStorage
+      localStorage.setItem('jwt_pres', token);
+      lert("Vérifiez votre e-mail pour le confirmer.")
+      Navigate('/PrestataireDashboard');
     } catch (error) {
       if (error.response) {
         // Access the 'message' from the server response
-          SetIxeistError(true);
-         const errorMessage = error.response.data.message;
-         setMessageError(errorMessage);
-         scrollTop();
-
+        setIxeistError(true);
+        const errorMessage = error.response.data.message;
+        setMessageError(errorMessage);
+        scrollTop();
       } else {
         console.error('Error:', error.message); // Handle network or unexpected errors
       }
-      return 
     }
-
-    Navigate('/PrestataireDashboard');
-    alert("Vérifiez votre e-mail pour le confirmer.")
+   
+    
     return;
     
   };
