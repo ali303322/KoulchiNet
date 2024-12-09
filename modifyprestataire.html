@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#f0f2f5] font-sans">
+    <main class="p-8">
+        <!-- Profile Information Card -->
+        <div class="bg-white rounded-lg p-4 mb-4 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+            <div class="flex items-center mb-8">
+                <!-- Profile Picture -->
+                <div class="w-[150px] h-[150px] bg-[#e9ecef] rounded-full flex items-center justify-center text-5xl text-[#6c757d] mr-8">
+                    AD
+                </div>
+                <!-- Profile Info -->
+                <div>
+                    <h1 class="text-[#333] text-2xl font-bold m-0">Alice Dubois</h1>
+                    <p class="text-[#6c757d] my-2">Administratrice Principale</p>
+                    <p class="text-[#6c757d] my-2">alice.dubois@projectx.com</p>
+                    <p class="text-[#6c757d] my-2">Membre depuis: Janvier 2022</p>
+                </div>
+            </div>
+
+            <h2 class="text-[#4a90e2] text-xl font-semibold mt-0 mb-6">Informations personnelles</h2>
+            
+            <form id="profile-form" class="space-y-4">
+                <!-- Informational Header -->
+                <div class="mb-6">
+                  
+                    <div class="flex items-center gap-2 text-red-500">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Si vous n'avez pas de diplôme, mettez une partie de votre travail</span>
+                    </div>
+                </div>
+
+            
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="nom" class="block text-sm font-bold text-gray-700 mb-1">Nom</label>
+                        <input type="text" id="nom" name="nom" value="Reda" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                    <div>
+                        <label for="prenom" class="block text-sm font-bold text-gray-700 mb-1">Prenom</label>
+                        <input type="text" id="prenom" name="prenom" value="Ahmed" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="ville" class="block text-sm font-bold text-gray-700 mb-1">Ville</label>
+                        <select id="ville" name="ville" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <option value="Casablanca">Casablanca</option>
+                            <!-- Add other cities -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="quartier" class="block text-sm font-bold text-gray-700 mb-1">Quartier</label>
+                        <select id="quartier" name="quartier" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <option value="Anfa">Anfa</option>
+                            <!-- Add other neighborhoods -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="competence" class="block text-sm font-bold text-gray-700 mb-1">Compétence</label>
+                        <input type="text" id="competence" name="competence" placeholder="compétence..." 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                    <div>
+                        <label for="diplome" class="block text-sm font-bold text-gray-700 mb-1">Diplome</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="diplome" name="diplome" placeholder="upload media" readonly
+                                class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <label for="diplomeFile" class="cursor-pointer px-3 py-2 bg-gray-100 border border-[#ced4da] rounded-md">
+                                <i class="fas fa-upload"></i>
+                            </label>
+                            <input type="file" id="diplomeFile" class="hidden">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="status" class="block text-sm font-bold text-gray-700 mb-1">Status</label>
+                        <select id="status" name="status" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <option value="Entreprise">Entreprise</option>
+                            <!-- Add other status options -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="service" class="block text-sm font-bold text-gray-700 mb-1">Service</label>
+                        <select id="service" name="service" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <option value="Plombier">Plombier</option>
+                            <!-- Add other service options -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="tel" class="block text-sm font-bold text-gray-700 mb-1">Tel</label>
+                        <input type="text" id="tel" name="tel" value="0 666 666 666" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                    <div>
+                        <label for="experience" class="block text-sm font-bold text-gray-700 mb-1">Experience</label>
+                        <select id="experience" name="experience" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                            <option value="5 years">5 years</option>
+                            <!-- Add other experience options -->
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="disponibilite" class="block text-sm font-bold text-gray-700 mb-1">Disponibilité</label>
+                    <input type="text" id="disponibilite" name="disponibilite" value="Lundi - Vendredi" 
+                        class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="linkedin" class="block text-sm font-bold text-gray-700 mb-1">LinkedIn (optionel)</label>
+                        <input type="text" id="linkedin" name="linkedin" placeholder="le lien vers votre profil" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                    <div>
+                        <label for="facebook" class="block text-sm font-bold text-gray-700 mb-1">Facebook (optionel)</label>
+                        <input type="text" id="facebook" name="facebook" placeholder="le lien vers votre profil" 
+                            class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="youtube" class="block text-sm font-bold text-gray-700 mb-1">YouTube (optionel)</label>
+                    <input type="text" id="youtube" name="youtube" placeholder="le lien vers votre profil" 
+                        class="w-full px-3 py-2 border border-[#ced4da] rounded-md focus:ring-2 focus:ring-[#4a90e2] focus:border-[#4a90e2] outline-none">
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="pt-4 border-t border-[#e9ecef] flex justify-end space-x-4">
+                    <button type="button" onclick="window.location.href='prestatairedash.html'" 
+                        class="px-4 py-2 border border-[#ced4da] rounded-md text-[#6c757d] hover:bg-gray-50 font-bold">
+                        Annuler
+                    </button>
+                    <button type="button" onclick="saveChanges()" 
+                        class="px-4 py-2 bg-[#4a90e2] text-white rounded-md hover:bg-[#357abd] font-bold">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Activity Log Card -->
+        <div class="bg-white rounded-lg p-4 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+            <h2 class="text-[#4a90e2] text-xl font-semibold mt-0 mb-4">Journal d'activité récente</h2>
+            
+            <div class="max-h-[300px] overflow-y-auto">
+                <div class="py-2 border-b border-[#e9ecef] last:border-b-0">
+                    <strong>19/05/2023 14:30</strong> - Mise à jour du statut d'un service
+                </div>
+                <div class="py-2 border-b border-[#e9ecef] last:border-b-0">
+                    <strong>18/05/2023 11:15</strong> - Ajout d'un nouveau prestataire
+                </div>
+                <div class="py-2 border-b border-[#e9ecef] last:border-b-0">
+                    <strong>17/05/2023 16:45</strong> - Résolution d'un litige client
+                </div>
+                <div class="py-2 border-b border-[#e9ecef] last:border-b-0">
+                    <strong>16/05/2023 09:00</strong> - Génération du rapport mensuel
+                </div>
+                <div class="py-2 border-b border-[#e9ecef] last:border-b-0">
+                    <strong>15/05/2023 13:20</strong> - Modification des paramètres de facturation
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function saveChanges() {
+            const formData = {
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                ville: document.getElementById('ville').value,
+                quartier: document.getElementById('quartier').value,
+                competence: document.getElementById('competence').value,
+                diplome: document.getElementById('diplome').value,
+                status: document.getElementById('status').value,
+                service: document.getElementById('service').value,
+                tel: document.getElementById('tel').value,
+                experience: document.getElementById('experience').value,
+                disponibilite: document.getElementById('disponibilite').value,
+                linkedin: document.getElementById('linkedin').value,
+                facebook: document.getElementById('facebook').value,
+                youtube: document.getElementById('youtube').value
+            };
+
+            localStorage.setItem('profileData', JSON.stringify(formData));
+            window.location.href = 'prestatairedash.html';
+        }
+
+        // Load existing data when form opens
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedData = localStorage.getItem('profileData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                document.getElementById('nom').value = data.nom;
+                document.getElementById('prenom').value = data.prenom;
+                document.getElementById('ville').value = data.ville;
+                document.getElementById('quartier').value = data.quartier;
+                document.getElementById('competence').value = data.competence;
+                document.getElementById('diplome').value = data.diplome;
+                document.getElementById('status').value = data.status;
+                document.getElementById('service').value = data.service;
+                document.getElementById('tel').value = data.tel;
+                document.getElementById('experience').value = data.experience;
+                document.getElementById('disponibilite').value = data.disponibilite;
+                document.getElementById('linkedin').value = data.linkedin;
+                document.getElementById('facebook').value = data.facebook;
+                document.getElementById('youtube').value = data.youtube;
+            }
+        });
+    </script>
+</body>
+</html> 

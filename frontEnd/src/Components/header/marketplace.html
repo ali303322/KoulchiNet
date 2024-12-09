@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koulchinet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Add Tailwind Config for Roboto -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <!-- Header Section -->
+    <header class="bg-white w-full h-[70px] shadow-sm">
+        <div class="container mx-auto px-4 h-full">
+            <div class="flex items-center justify-between h-full">
+                <!-- Logo -->
+                <a href="/" class="flex items-center">
+                    <img src="image/Koulshinet.com (1).png" alt="Koulchinet.com" class="h-[200px] w-auto absolute -top-12 left-0 object-contain 
+                    filter contrast-125 brightness-105
+                    [image-rendering:crisp-edges]
+                    [image-rendering:-webkit-optimize-contrast]">
+                </a>
+
+                <!-- Main Navigation -->
+                <nav class="flex items-center space-x-8 ml-52">
+                    <a href="apropo.html" class="text-gray-700 hover:text-blue-600">A propos</a>
+                    <a href="header.html" class="text-gray-700 hover:text-blue-600">Accueil</a>
+                    <a href="service.html" class="text-gray-700 hover:text-blue-600">Nos services</a>
+                    <a href="devenirprestataire.html" class="text-gray-700 hover:text-blue-600">Devenir prestataire</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-blue-600">Marketplace</a>
+                </nav>
+
+                <!-- Right Side Navigation -->
+                <div class="flex items-center space-x-6">
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600">Se connecter</a>
+                    <a href="signin.html" class="bg-[#4052B4] text-white px-4 py-2 rounded hover:bg-blue-700">S'inscrire</a>
+                    
+                    <!-- Language Dropdown -->
+                    <div class="relative">
+                        <button id="langBtn" class="flex items-center text-gray-700 hover:text-blue-600">
+                            Fr
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="langDropdown" class="absolute right-0 mt-2 w-12 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                 Fr
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                 En
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                 Ar
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<!-- Hero Section -->
+<section class="relative h-[434px] bg-cover bg-center" style="background-image: url('image/img4.jpeg');">
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Content Container -->
+    <div class="relative z-10 h-full flex flex-col items-center justify-center">
+        <!-- Hero Text -->
+        <div class="relative z-10 container mx-auto px-4 h-full flex flex-col items-center justify-center">
+            <h1 class="text-white text-6xl font-bold mb-4">La Marketplace des Services de Proximité</h1>
+            <p class="text-white text-3xl">Trouvez les meilleurs équipements pour exercer ou faire appel à des services professionnels de qualité</p>
+        </div>
+    </div>
+
+    <!-- Search Section - Positioned to overlap -->
+    <div class="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-[95%] z-20">
+            
+          
+        
+
+          
+</section>
+
+<!-- After the hero section and before the search bar -->
+
+<!-- Bar Section with Search -->
+<div class="relative -mt-8 mb-12">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="bg-white rounded-lg shadow-md p-6 flex items-center gap-4">
+            <!-- Search Input -->
+            <input 
+                type="text" 
+                placeholder="Rechercher un produit..." 
+                class="flex-1 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-blue-500"
+            >
+            <!-- Categories Dropdown -->
+            <div class="relative w-72">
+                <select class="w-full appearance-none border border-gray-200 rounded-lg px-4 py-3 pr-8 text-gray-700 bg-white">
+                    <option>Toutes les catégories</option>
+                    <option>Services Domestiques</option>
+                    <option>Services d'accompagnement</option>
+                    <option>Services Personnels</option>
+                    <option>Services Décoration</option>
+                    <option>Services Rénovation</option>
+                    <option>Services Informatiques</option>
+                    <option>Services Événements</option>
+                    <option>Services Professionnels</option>
+                    <option>Services Juridiques</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+            </div>
+            <!-- Search Button -->
+            <button class="bg-[#4052B4] hover:bg-blue-700 text-white px-8 py-3 rounded-lg transition-colors">
+                Rechercher
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Section -->
+<div class="max-w-7xl mx-auto px-4 mb-12">
+    <div class="flex gap-8">
+        <!-- Left Sidebar - Categories -->
+        <div class="w-72">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-semibold text-[#4052B4] mb-4">Catégories</h3>
+                
+                <!-- Categories Dropdown -->
+                <div class="relative mb-4">
+                    <select class="w-full appearance-none border border-gray-200 rounded-lg px-4 py-2 pr-8 text-gray-700 bg-white mb-4">
+                        <option>Sélectionnez une catégorie</option>
+                        <option>Services Domestiques</option>
+                        <option>Services d'accompagnement</option>
+                        <option>Services Personnels</option>
+                        <option>Services Décoration</option>
+                        <option>Services Rénovation</option>
+                        <option>Services Informatiques</option>
+                        <option>Services Événements</option>
+                        <option>Services Professionnels</option>
+                        <option>Services Juridiques</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Categories Checkboxes -->
+                <div class="space-y-3">
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Domestiques</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services d'accompagnement</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Personnels</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Décoration</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Rénovation</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Informatiques</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Événements</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Professionnels</span>
+                    </label>
+                    <label class="flex items-center gap-2 text-gray-600 hover:text-[#4052B4] cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-300 text-[#4052B4]">
+                        <span>Services Juridiques</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Products Grid -->
+        <div class="flex-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Product Card 1 - Services Informatiques -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
+                    <div class="h-48 bg-[#e9edf3] flex items-center justify-center">
+                        <svg style="width:64px;height:64px;fill:#4052B4" viewBox="0 0 24 24">
+                            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-[#4052B4] text-sm mb-1">Services Informatiques</div>
+                        <h3 class="font-semibold mb-2">Kit de maintenance PC</h3>
+                        <div class="text-[#4052B4] font-bold text-xl mb-4">89.99 €</div>
+                        <a href="#" class="block bg-[#f6ad55] hover:bg-[#ed8936] text-white text-center py-2 rounded-md transition-colors">
+                            Acheter
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 - Services Domestiques -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
+                    <div class="h-48 bg-[#e9edf3] flex items-center justify-center">
+                        <svg style="width:64px;height:64px;fill:#4052B4" viewBox="0 0 24 24">
+                            <path d="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75M12,15C13.5,15 16.5,15.75 16.5,17.25V18H7.5V17.25C7.5,15.75 10.5,15 12,15Z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-[#4052B4] text-sm mb-1">Services Domestiques</div>
+                        <h3 class="font-semibold mb-2">Kit de nettoyage premium</h3>
+                        <div class="text-[#4052B4] font-bold text-xl mb-4">49.99 €</div>
+                        <a href="#" class="block bg-[#f6ad55] hover:bg-[#ed8936] text-white text-center py-2 rounded-md transition-colors">
+                            Acheter
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 - Services Rénovation -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:-translate-y-1 transition-transform">
+                    <div class="h-48 bg-[#e9edf3] flex items-center justify-center">
+                        <svg style="width:64px;height:64px;fill:#4052B4" viewBox="0 0 24 24">
+                            <path d="M13.5,17V19L12,22L10.5,19V17H13.5M19.5,3.5L18,2L16.5,3.5L15,2L13.5,3.5L12,2L10.5,3.5L9,2L7.5,3.5L6,2L4.5,3.5L3,2V14H12V12.5A2.5,2.5 0 0,1 14.5,10A2.5,2.5 0 0,1 17,12.5V14H21V2L19.5,3.5Z" />
+                        </svg>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-[#4052B4] text-sm mb-1">Services Rénovation</div>
+                        <h3 class="font-semibold mb-2">Kit d'outils rénovation</h3>
+                        <div class="text-[#4052B4] font-bold text-xl mb-4">149.99 €</div>
+                        <a href="#" class="block bg-[#f6ad55] hover:bg-[#ed8936] text-white text-center py-2 rounded-md transition-colors">
+                            Acheter
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-[#0A1931] text-white py-16">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-5 gap-16">
+        <!-- Company Info -->
+        <div class="space-y-8">
+            <h3 class="text-2xl font-bold mb-6 text-[#4A69BD]">Koulchinet.com</h3>
+            <p class="text-gray-300 mb-6">Simplifiez vous la vie: Tous vos services en un clic</p>
+            <div class="flex space-x-4">
+                <a href="#" class="text-gray-300 hover:text-[#4A69BD]">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-[#4A69BD]">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-[#4A69BD]">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-300 hover:text-[#4A69BD]">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+                
+            </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="space-y-8">
+            <h4 class="text-sm font-bold mb-6">Pages</h4>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Acceuil</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Marketplace</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">A propos</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Admin</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Prestataire dashboard</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Client dashboard</a></li>
+            </ul>
+        </div>
+
+        <!-- Services -->
+        <div class="space-y-8">
+            <h4 class="text-sm font-bold mb-6">Services</h4>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Service domestiques</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Service décoration</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Services d'accompagnement et de soutien</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Service Rénovations résidentielles</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Revêtement Plafond</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Revêtement sol</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Services Personnels et Bien-être</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Services Evénements</a></li>
+            </ul>
+        </div>
+
+        <!-- Assistance -->
+        <div class="space-y-8">
+            <h4 class="text-sm font-bold mb-6">Assistance</h4>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Conditions générales</a></li>
+                <li><a href="#" class="text-gray-300 hover:text-[#4A69BD]">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="space-y-8">
+            <h4 class="text-sm font-bold mb-6"><a href="contact.html" class="hover:text-gray-300 transition-colors">Contact</a></h4>
+            <ul class="space-y-2">
+                <li class="text-gray-300">
+                    <span class="font-bold">Société:</span> KOULCHINET
+                </li>
+                <li class="text-gray-300">
+                    <span class="font-bold">Adresse:</span> 123 rue Bahr Kazwine N 8 Harhoura, temara, Maroc
+                </li>
+                <li class="text-gray-300">
+                    <span class="font-bold">Tel:</span> 06 66 66 66 66
+                </li>
+                <li class="text-gray-300">
+                    <span class="font-bold">Email:</span> contact@koulchinet.com
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="max-w-7xl mx-auto px-8 mt-16 pt-8 border-t border-gray-700">
+        <div class="text-center text-gray-400 text-sm">
+            © All right reserved by <a href="#" class="text-[#4A69BD]">koulchinet</a>. Powered by <a href="#" class="text-[#4A69BD]">CUDI09</a>
+        </div>
+    </div>
+</footer>  
+
+<!-- Add this JavaScript at the end of your body tag -->
+<script>
+    // Get the buttons and dropdowns
+    const langBtn = document.getElementById('langBtn');
+    const langDropdown = document.getElementById('langDropdown');
+
+    // Toggle language dropdown
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langDropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', () => {
+        langDropdown.classList.add('hidden');
+    });
+</script>
+</body>
+</html> 
