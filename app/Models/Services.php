@@ -10,18 +10,7 @@ class Services extends Model
 
     use HasFactory;
 
-    use HasFactory;
-
-    // Add id_prestataire to the fillable array
-    protected $fillable = [
-        'id_prestataire', // Add this line
-        'name_service',
-        'description_service',
-        'annees_experience',
-        'statut',
-        "category_id",
-    ];
-    
+    protected $fillable = ['serviceName', 'category_id','icon','PRO'];
 
     /**
      * Relation avec la catégorie.
@@ -33,6 +22,23 @@ class Services extends Model
 
     public function sousServices()
     {
-        return $this->hasMany(SousService::class);
+        return $this->hasMany(SousService::class,'service_id');
+    }
+
+    public function serviceContent()
+    {
+        return $this->hasMany(ServiveContent::class,'service_id');
+    }
+    public function aventagesService()
+    {
+        return $this->hasMany(AventageServive::class,'service_id');
+    }
+    public function questionService()
+    {
+        return $this->hasMany(QestionsServive::class,'service_id');
+    }
+    public function pncs()
+    {
+        return $this->hasMany(PNC::class,'service_id');
     }
 }

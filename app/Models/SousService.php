@@ -10,7 +10,7 @@ class SousService extends Model
 
     use HasFactory;
 
-    protected $fillable = ['nom', 'category_id'];
+    protected $fillable = ['sousService', 'service_id'];
 
 
     public function services()

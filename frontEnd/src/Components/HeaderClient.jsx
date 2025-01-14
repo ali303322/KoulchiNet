@@ -1,21 +1,41 @@
 import React, { useState } from 'react'
 import img3 from "./image/img3.png"
 import KoulshiNet from "./image/Koulshinet.com (1).png"
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 export default function HeaderClient() {
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const Client = JSON.parse(localStorage.getItem('user'));
+    const role = localStorage.getItem('role');
+   const { t, i18n } = useTranslation(); // Translation hook
+    const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
-    const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
-
-    const closeDropdown = (e) => {
-      if (!e.target.closest('#langBtn')) {
-        setIsDropdownOpen(false);
-      }
+    const toggleLangDropdown = () => {
+      setLangDropdownOpen(!langDropdownOpen);
     };
 
-    React.useEffect(() => {
-      window.addEventListener('click', closeDropdown);
-      return () => window.removeEventListener('click', closeDropdown);
-    }, []);
+    const changeLanguage = (lang) => {
+        i18n.changeLanguage(lang); // Switch language dynamically
+        setLangDropdownOpen(false);
+      };
+
+
+      const getLanguageIcon = () => {
+        switch (i18n.language) {
+          case 'fr':
+            return '🇫🇷'; // French flag emoji
+          case 'ar':
+            return '🇲🇦'; // Moroccan flag emoji (for Arabic)
+          case 'en':
+          default:
+            return '🇬🇧'; // UK flag emoji
+        }
+      };
+
+    // React.useEffect(() => {
+    //   window.addEventListener('click', closeDropdown);
+    //   return () => window.removeEventListener('click', closeDropdown);
+    // }, []);
 
     return (
       <header className="bg-white w-full h-[70px] shadow-sm">
@@ -26,7 +46,7 @@ export default function HeaderClient() {
               <img
                 src={KoulshiNet}
                 alt="Koulchinet.com"
-                className="h-[200px] w-auto absolute -top-12 left-0 object-contain
+                className="h-[150px] w-auto  -top-12 left-0 object-contain
                 filter contrast-125 brightness-105
                 [image-rendering:crisp-edges]
                 [image-rendering:-webkit-optimize-contrast]"
@@ -34,79 +54,73 @@ export default function HeaderClient() {
             </a>
 
             {/* Right Side Navigation */}
+              {/* Main Navigation */}
+              <nav className="flex items-center space-x-8 ml-52">
+                        <Link to="/AboutUs" className="text-gray-700 hover:text-blue-600">{t('about')}</Link>
+                        <Link to="/" className="text-gray-700 hover:text-blue-600">{t('home')}</Link>
+                        <Link to="/services" className="text-gray-700 hover:text-blue-600">{t('services')}</Link>
+                        <Link to="/DevenirePrestataire" className="text-gray-700 hover:text-blue-600">{t('provider')}</Link>
+                        <Link to="/marketplace" className="text-gray-700 hover:text-blue-600">{t('marketplace')}</Link>
+                    </nav>
             <div className="flex items-center space-x-10">
               {/* Language Dropdown */}
               <div className="relative">
-                <button
-                  id="langBtn"
-                  className="flex items-center text-black hover:text-blue-600 font-bold text-lg"
-                  onClick={toggleDropdown}
-                >
-                  Fr
-                  <svg
-                    className="w-5 h-5 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-16 bg-white rounded-md shadow-lg py-1 z-50">
-                    <a
-                      href="#"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold"
-                    >
-                      Fr
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold"
-                    >
-                      En
-                    </a>
-                    <a
-                      href="#"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-bold"
-                    >
-                      Ar
-                    </a>
-                  </div>
-                )}
-              </div>
+                            <button
+                                onClick={toggleLangDropdown}
+                                className="flex items-center text-gray-700 hover:text-blue-600 text-sm"
+                            >
+                                <span className="mr-2 text-lg">{getLanguageIcon()}</span>
+                                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {langDropdownOpen && (
+                                <div className="absolute right-0 mt-2 w-12 bg-white rounded-md shadow-lg py-1 z-50">
+                                    <button onClick={() => changeLanguage('fr')} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        Fr
+                                    </button>
+                                    <button onClick={() => changeLanguage('ar')} className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        Ar
+                                    </button>
+                                </div>
+                            )}
+                        </div>
 
               {/* Notification Bell */}
-              <button className="text-[#4a69bd] hover:text-blue-600 relative">
+              {/* <button className="text-[#4a69bd] hover:text-blue-600 relative">
                 <i className="fas fa-bell text-2xl"></i>
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   3
                 </span>
-              </button>
+              </button> */}
 
-              {/* Chat Icon */}
-              <button className="text-[#4a69bd] hover:text-blue-600 relative">
-                <i className="fas fa-comment-dots text-2xl"></i>
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  2
-                </span>
-              </button>
+
+
 
               {/* Profile Picture */}
-              <div className="relative">
-                <button className="flex items-center space-x-3">
-                  <img
-                    src={img3}
+              <Link to='/ClientDashboard'>
+              <div className="relative flex items-center space-x-3">
+              {Client? (
+                    <img
+                    src={`http://127.0.0.1:8000/profile_photos_Client/${Client.photo_profel}`}
                     alt="Profile"
                     className="w-16 h-16 rounded-full object-cover"
-                  />
-                </button>
-              </div>
+                    />
+                ) : (
+                    <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center">
+                    <span className="text-gray-500 text-sm">No Image</span>
+                    </div>
+                )}
+
+                <div className="flex flex-col">
+                    <p className="font-medium">
+                    {Client?.nom || "Nom inconnu"} {Client?.prenom || "Prénom inconnu"}
+                    </p>
+                    <p className="text-sm text-gray-500">{role || "Rôle non spécifié"} {Client?.id}</p>
+                </div>
+                </div>
+              </Link>
+
             </div>
           </div>
         </div>

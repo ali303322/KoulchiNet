@@ -1,94 +1,140 @@
 // import React from 'react'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderClient from "./HeaderClient";
 import SideBarClient from "./SideBarClient"
-import img3 from "./image/img3.png"
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export default function ClientDashboard() {
-    // const [isLangDropdownVisible, setLangDropdownVisible] = useState(false);
-    // const [isModifyModalVisible, setModifyModalVisible] = useState(false);
-    const [userInfo, ] = useState({
-        nom: "Belzaar",
-        prenom: "Hatim",
-        ville: "Tanger",
-        quartier: "Charf",
-    });
+   const [client,setClient]=useState([])
+   const navigate=useNavigate();
+   const token=localStorage.getItem("token")?localStorage.getItem("token"):"";
 
-    // const toggleLangDropdown = () => setLangDropdownVisible(!isLangDropdownVisible);
+    const checkIsEmailVerfied=async()=>{
+        if (!token) {
+            navigate("login");
+           return
+        }
+        try {
+            const response = await axios.post(
+              'http://127.0.0.1:8000/api/checkIfClientExists',
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
 
-    // const handleSave = (newInfo) => {
-    //     setUserInfo(newInfo);
-    //     setModifyModalVisible(false);
-    // };
+             if (response.data.client) {
+                 setClient(response.data.client)
+             }else{
+                window.location="http://localhost:3000/login"
+                return
+             }
+          }catch (error) {
+             console.error('Error:', error);
+             window.location="http://localhost:3000/login"
+             return
+
+          }
+
+    }
+     useEffect(()=>{checkIsEmailVerfied()},[])
+
+
+     const { t } = useTranslation();
+
 
     return (
-        <div className="bg-gray-100 font-sans">
-            <HeaderClient/>
+    <div className="bg-gray-100 font-sans">
+        <HeaderClient/>
 
-            {/* Main Content */}
-            <div className="flex min-h-screen">
-               <SideBarClient/>
-                {/* Main Content Area */}
-                <div className="flex-1 p-8 bg-gray-50">
-                    {/* Account Status */}
-                    <div className="bg-white rounded-lg p-6 mb-6">
-                        <div className="flex items-center">
-                            <i className="fas fa-id-card text-[#4a69bd] mr-2"></i>
-                            <span className="text-[#4a69bd]">Statut du compte :</span>
-                            <span className="bg-green-100 text-green-600 px-2 py-1 rounded text-sm ml-2">
-                                Confirmé
-                            </span>
-                        </div>
-                    </div>
+        {/* Main Content */}
+        <div className="flex min-h-screen">
+           <SideBarClient/>
 
-                    {/* General Information Section */}
-                    <div className="bg-white rounded-lg p-6">
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="flex items-center">
-                                <i className="fas fa-user text-[#4a69bd] mr-2"></i>
-                                <span className="text-[#4a69bd]">Informations générales :</span>
-                            </div>
-                            <button
-                                id="modifyButton"
-                                className="bg-[#4a69bd] text-white px-4 py-2 rounded hover:bg-[#3d5aa7]"
-                            >
-                                Modifier
-                            </button>
-                        </div>
 
-                        {/* Profile Content */}
-                        <div className="flex items-start gap-12">
-                            {/* Profile Image */}
-                            <div>
-                                <img src={img3} alt="Profile" className="w-64 h-64 rounded-full object-cover" />
-                            </div>
-
-                            {/* Information List */}
-                            <div className="flex-1 pt-4">
-                                <div className="space-y-4">
-                                    <div className="flex">
-                                        <span className="text-gray-600 w-24">Nom:</span>
-                                        <span id="info-nom">{userInfo.nom}</span>
-                                    </div>
-                                    <div className="flex">
-                                        <span className="text-gray-600 w-24">Prenom:</span>
-                                        <span id="info-prenom">{userInfo.prenom}</span>
-                                    </div>
-                                    <div className="flex">
-                                        <span className="text-gray-600 w-24">Ville:</span>
-                                        <span id="info-ville">{userInfo.ville}</span>
-                                    </div>
-                                    <div className="flex">
-                                        <span className="text-gray-600 w-24">Quartier:</span>
-                                        <span id="info-quartier">{userInfo.quartier}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/* Main Content Area */}
+            <div className="flex-1 p-8 bg-gray-50">
+      {/* Account Status */}
+      <div className="bg-white rounded-lg p-6 mb-6">
+        <div className="flex items-center">
+          <i className="fas fa-id-card text-[#4a69bd] mr-2"></i>
+          <span className="text-[#4a69bd]">{t("clientDash.accountStatus")}:</span>
+          <span className="bg-green-100 text-green-600 px-2 py-1 rounded text-sm ml-2">
+            {t("clientDash.confirmed")}
+          </span>
         </div>
+      </div>
+
+      {/* General Information Section */}
+      <div className="bg-white rounded-lg p-6">
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex items-center">
+            <i className="fas fa-user text-[#4a69bd] mr-2"></i>
+            <span className="text-[#4a69bd]">{t("clientDash.generalInfo")}:</span>
+          </div>
+          <Link
+            state={{ id: client.id }}
+            to={{
+              pathname: "/ClientDashboard/modifyClient",
+            }}
+            className="bg-[#4a69bd] text-white px-4 py-2 rounded-lg hover:bg-[#3d5aa7]"
+          >
+            {t("clientDash.modify")}
+          </Link>
+        </div>
+
+        {/* Profile Content */}
+        <div className="flex items-start gap-12">
+          {/* Profile Image */}
+          <div>
+            <img
+              src={`http://127.0.0.1:8000/profile_photos_Client/${client.photo_profel}`}
+              alt={t("profileImage")}
+              className="w-64 h-64 rounded-full object-cover"
+            />
+          </div>
+
+          {/* Information List */}
+          <div className="flex-1 pt-4">
+            <div className="space-y-4">
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.name")}:</span>
+                <span id="info-nom">{client.nom}</span>
+              </div>
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.firstName")}:</span>
+                <span id="info-prenom">{client.prenom}</span>
+              </div>
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.email")}:</span>
+                <span id="info-prenom">{client.email}</span>
+              </div>
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.phone")}:</span>
+                <span id="info-prenom">{client.telephone}</span>
+              </div>
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.city")}:</span>
+                <span id="info-ville">{client.ville}</span>
+              </div>
+              <div className="flex">
+                <span className="text-gray-600 w-24">{t("clientDash.district")}:</span>
+                <span id="info-quartier">{client.aroundissment}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+    </div>
+
+
+
     );
 }
 

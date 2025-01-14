@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('ville');
             $table->string('aroundissment');
             $table->string('email_verification_token');
+            $table->boolean('is_approved')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->dateTime('disponibilite');
             $table->timestamps();

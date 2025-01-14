@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function SearchBar() {
     const [users, Setusers] = useState([]);
@@ -10,13 +11,22 @@ export default function SearchBar() {
     const [Dist, setDist] = useState(); // take the district user chosen
     const [services, setServices] = useState([]); // take all services on the data base
     const [service, setService] = useState(); // take the service of the user chose
+    const [serviceName, setServiceName] = useState("");
+    const { t } = useTranslation();
     const navigate = useNavigate();
       // fetching for citys
       useEffect(() => {
         const fetchVilles = async () => {
             try {
                 const result = await axios.get('http://127.0.0.1:8000/api/villes');
-                setData(result.data);
+                if(result){
+                    let sortedIVilles = [];
+                    result.data.forEach(element => {
+                        sortedIVilles.push(element.villePricipale)
+                    });
+                    sortedIVilles.sort();
+                    setData(sortedIVilles);
+                }
             } catch (error) {
                 console.log(error.response?.data || error.message);
             }
@@ -39,8 +49,14 @@ export default function SearchBar() {
 
             axios.request(config)
               .then((response) => {
-                setDistricts(response.data);
-                console.log(districts);
+                if(response){
+                    let sortedDist = [];
+                    response.data.forEach(element => {
+                        sortedDist.push(element.Arrondissement)
+                    });
+                    sortedDist.sort();
+                    setDistricts(sortedDist);
+                }
 
               })
               .catch((error) => {
@@ -74,7 +90,7 @@ export default function SearchBar() {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/api/users',
+                url: 'http://127.0.0.1:8000/api/prestataires',
                 headers: { }
               };
 
@@ -88,29 +104,52 @@ export default function SearchBar() {
 
         },[]);
 
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        const rows = [];
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].role === "prestataire" && users[i].district === Dist && users[i].ville === city && users[i].service === service){
-                rows.push(users[i]);
-            }
-        }
-        navigate(`/servicePageDesc/${service}` , {state : {users : rows , ville : city , dist : Dist , service : service}})
 
-    }
+
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+
+            // Filter the users based on the criteria
+            const rows = users.filter(user =>
+                user.aroundissment === Dist && user.ville === city && user.service_id === service
+            );
+
+            try {
+                // Make the API call to get the service name
+                const response = await axios.get(`http://127.0.0.1:8000/api/getserviceName/${service}`);
+
+                // Log the entire response to see its structure
+                console.log('API Response:', response);
+
+                // Get the service name from the response (adjust based on actual response structure)
+                const serviceName = response.data;  // Ensure 'name' is the correct field
+
+                // If service name exists, navigate to the new route
+                if (serviceName) {
+                    navigate(`/servicePageDesc/${serviceName}`, {
+                        state: { users: rows, ville: city, dist: Dist, service : serviceName }
+                    });
+                } else {
+                    console.error('Service name is undefined or invalid.');
+                }
+            } catch (error) {
+                console.error('Error fetching service name:', error);
+            }
+        };
+
+
   return (
     <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-[95%] z-20">
     <div className="max-w-[1400px] mx-auto bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-center text-3xl font-bold text-[#4052B4] mb-8">
-            Trouvez votre Service
+            {t('findService')}
         </h2>
         <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-4 gap-8">
                 {/* Ville */}
                 <div className="flex flex-col">
                     <label htmlFor="ville" className="text-sm text-gray-600 mb-2 ml-6">
-                        Choisir votre ville
+                    {t('chooseCity')}
                     </label>
                     <select
                         id="ville"
@@ -118,10 +157,10 @@ export default function SearchBar() {
                         onChange={(e) => setCity(e.target.value)}
                         className="w-full px-4 py-2.5 rounded-full border border-gray-300"
                     >
-                        <option value="">Choisir votre ville</option>
+                        <option value="">{t('chooseCity')}</option>
                         {data.map((ville, index) => (
-                            <option key={index} value={ville.villePricipale}>
-                                {ville.villePricipale}
+                            <option key={index} value={ville}>
+                                {ville}
                             </option>
                         ))}
                     </select>
@@ -130,7 +169,7 @@ export default function SearchBar() {
                 {/* Secteur */}
                 <div className="flex flex-col">
                     <label htmlFor="quartier" className="text-sm text-gray-600 mb-2 ml-6">
-                        Choisir votre  Arrondissement
+                    {t('chooseDistrict')}
                     </label>
                     <select
                         id="quartier"
@@ -139,10 +178,10 @@ export default function SearchBar() {
                         className="w-full px-4 py-2.5 rounded-full border border-gray-300"
                         disabled={!districts.length}
                     >
-                        <option value="">Choisir votre Arrondissement</option>
+                        <option value="">{t('chooseDistrict')}</option>
                         {districts.map((district, index) => (
-                            <option key={index} value={district.Arrondissement}>
-                                {district.Arrondissement}
+                            <option key={index} value={district}>
+                                {district}
                             </option>
                         ))}
                     </select>
@@ -151,7 +190,7 @@ export default function SearchBar() {
                 {/* Service */}
                 <div className="flex flex-col">
                     <label htmlFor="service" className="text-sm text-gray-600 mb-2 ml-6">
-                        Choisir votre service
+                    {t('chooseService')}
                     </label>
                     <select
                         id="service"
@@ -159,9 +198,9 @@ export default function SearchBar() {
                         onChange={(e) => setService(e.target.value)}
                         className="w-full px-4 py-2.5 rounded-full border border-gray-300"
                     >
-                        <option value="">Choisir votre service</option>
+                        <option value="">{t('chooseService')}</option>
                         {services.map((serv, index) => (
-                            <option key={index} value={serv.serviceName}>
+                            <option key={index} value={serv.id}>
                                 {serv.serviceName}
                             </option>
                         ))}
@@ -187,7 +226,7 @@ export default function SearchBar() {
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                             />
                         </svg>
-                        Rechercher
+                        {t('search')}
                     </button>
                 </div>
             </div>

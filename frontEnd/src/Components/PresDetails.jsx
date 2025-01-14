@@ -1,10 +1,42 @@
 // import React from 'react'
 
 import SIdeBar from "./SIdeBar";
-import img3 from "./image/img3.png";
-import img2 from "./image/img2.jpeg";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 export default function PresDetails() {
+
+  const [prestataire,setPrestataire]=useState([]);
+  const [document,setDocument]=useState([])
+  const [service,setService]=useState();
+  const [dispo,setDispo]=useState([]);
+  const location = useLocation();
+  const [diplomes,setDeplomes]=useState([]);
+  const { id } = location.state || {}
+  useEffect(()=>{
+    axios.get("http://127.0.0.1:8000/api/getPrestataireById/"+id)
+    .then(res=>{
+      setPrestataire(res.data.prestataire);
+      setService(res.data.prestataire.service.serviceName);
+      setDocument(res.data.prestataire.documents[0])
+      setDeplomes(res.data.prestataire.documents[0].diplome_sertificat.split("#//#"));
+      setDispo(res.data.prestataire.disponibility);
+
+    })
+    .catch(err=>console.log(err))
+  },[])
+
+  const deletePrestataire=()=>{
+    const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce prestataire ?");
+    if (isConfirmed) {
+     axios.delete("http://127.0.0.1:8000/api/deleteprestataire/"+id)
+     .then(res=>alert(res.data.message))
+     .catch(err=>console.log(err))
+     //window.location.reload();
+     }
+  }
+
   return (
     <div className="flex min-h-screen bg-gray-100">
     {/* Sidebar */}
@@ -20,35 +52,58 @@ export default function PresDetails() {
         <div className="flex items-start space-x-8">
           {/* Profile Image */}
           <div className="w-32 h-32 rounded-full overflow-hidden bg-pink-200 flex-shrink-0">
-            <img src={img3} alt="Profile" className="w-full h-full object-cover" />
+            <img src={`http://127.0.0.1:8000/profile_photos_perstataire/${document&&document.photo}`} alt="Profile" className="w-full h-full object-cover" />
           </div>
 
           {/* User Details */}
           <div className="flex-1">
             <div className="space-y-4">
               {[
-                { label: "Nom", value: "Reda" },
-                { label: "Prenom", value: "Ahmed" },
-                { label: "Ville", value: "Casablanca" },
-                { label: "Quartier", value: "Anfa" },
-                { label: "Disponibilite", value: "Lundi - Vendredi 08:00h - 18:00h" },
-                { label: "Service", value: "Plombier" }
+                { label: "Nom", value: prestataire.nom },
+                { label: "Prenom", value: prestataire.prenom },
+                { label: "Email", value: prestataire.email },
+                { label: "Téléphone", value: prestataire.telephone },
+                { label: "Ville", value: prestataire.ville},
+                { label: "Quartier", value:prestataire.aroundissment },
+                { label: "Service", value: service},
+                { label: "Années d'expérience ", value: prestataire.annees_experience },
+                { label: "Statut", value: prestataire.statut },
+                // { label: "Disponibilite", value: prestataire.disponibilite },
+
               ].map((item, index) => (
                 <div className="flex items-center" key={index}>
                   <p className="text-gray-600 w-32">{item.label}:</p>
                   <p className="font-medium">{item.value}</p>
                 </div>
               ))}
+              <div>
+              <p className="text-gray-600 w-32">Disponibilité :</p>
+                {Object.entries(
+                    dispo.reduce((acc, item) => {
+                    acc[item.jour] = acc[item.jour] || [];
+                    acc[item.jour].push(`Début: ${item.debut} | Fin: ${item.fin}`);
+                    return acc;
+                    }, {})
+                ).map(([jour, times], index) => (
+                    <div key={index} className="mb-2">
+                    <p className="font-medium">
+                        {jour} | {times.join(" • ")}
+                    </p>
+                    </div>
+                ))}
+                </div>
+
+
             </div>
 
             {/* Action Buttons */}
             <div className="mt-6 flex space-x-4">
-              <button className="px-6 py-2 bg-red-500 text-white rounded-full text-sm hover:bg-red-600 transition-colors">
+              <button className="px-6 py-2 bg-red-500 text-white rounded-full text-sm hover:bg-red-600 transition-colors" onClick={deletePrestataire}>
                 Supprimer
               </button>
-              <button className="px-6 py-2 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors">
-                Activer
-              </button>
+              {/* <button className="px-6 py-2 bg-blue-700 text-white rounded-full text-sm hover:bg-blue-600 transition-colors">
+              améliorer
+              </button> */}
             </div>
           </div>
         </div>
@@ -56,18 +111,25 @@ export default function PresDetails() {
 
       {/* Files Section */}
       <div className="bg-white rounded-lg shadow-sm p-6">
-        <h3 className="text-[#4a69bd] text-lg font-medium mb-4">Fichier telecharge:</h3>
-        <div className="grid grid-cols-4 gap-6">
-          {Array(4)
-            .fill(null)
-            .map((_, index) => (
-              <div key={index} className="w-40 h-40 rounded-lg overflow-hidden">
-                <img src={img2} alt={`File ${index + 1}`} className="w-full h-full object-cover" />
-              </div>
-            ))}
+          <h3 className="text-[#4a69bd] text-lg font-medium mb-4">Fichier telecharge:</h3>
+ <div className="grid grid-cols-2 gap-6">
+  {diplomes &&diplomes.map((src, index) => {
+
+        return<div key={index}>
+          <iframe
+            src={`http://127.0.0.1:8000/diplomes/`+src}
+            title="PDF Viewer"
+           width={421}
+           height={400}
+
+            style={{ border: "none"}}
+          />
         </div>
-      </div>
+})}
+
+        </div>
     </div>
+  </div>
   </div>
   )
 }

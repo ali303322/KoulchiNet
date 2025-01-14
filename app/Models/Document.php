@@ -13,4 +13,9 @@ class Document extends Model
         'diplome_sertificat',
         'photo',
     ];
+
+    public function prestataire()
+    {
+        return $this->belongsTo(Prestataire::class , 'id_prestataire');
+    }
 }

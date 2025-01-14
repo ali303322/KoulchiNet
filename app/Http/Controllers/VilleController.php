@@ -14,7 +14,7 @@ class VilleController extends Controller
     public function index(){
 
         try {
-            $villes = Ville::all(    );
+            $villes = Ville::all();
 
             if (!$villes) {
                 return response()->json(['error' => 'No data found'], 404);
@@ -33,6 +33,21 @@ class VilleController extends Controller
             // Get all unique cities
             $getCityId = Ville::where('villePricipale',$city)->value('id');
             $districts = Arrondissement::where('ville_id' , $getCityId)->get('Arrondissement');
+
+            return response()->json($districts);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error fetching cities: ' . $e->getMessage()]);
+        }
+    }
+
+
+    public function getArroundissement()
+    {
+        try {
+            // Get all unique cities
+
+            $districts = Arrondissement ::All();
 
             return response()->json($districts);
 

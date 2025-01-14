@@ -3,29 +3,69 @@
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
-import img4 from './image/img4.jpeg'
+import img4 from './image/NosServices.webp'
 import SearchBar from "./SearchBar";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import HeaderPres from "./HeaderPres";
+import HeaderClient from "./HeaderClient";
+import { useTranslation } from "react-i18next";
+import DashboardHeader from "./DashboardHeader";
 export default function Service() {
-    const services = [
-        { icon: "fas fa-hard-hat", text: "Maçonnerie" },
-        { icon: "fas fa-utensils", text: "Rénovations cuisines" },
-        { icon: "fas fa-bath", text: "Rénovations salle de Bains" },
-        { icon: "fas fa-border-all", text: "Carrelage" },
-        { icon: "fas fa-square", text: "Parquet" },
-        { icon: "fas fa-window-restore", text: "Installation fenêtres et rideaux" },
-        { icon: "fas fa-layer-group", text: "Plâtre" },
-        { icon: "fas fa-hot-tub", text: "Installation chauffe à eaux" },
-        { icon: "fas fa-brush", text: "Peinture Intérieure et extérieure" },
-        { icon: "fas fa-snowflake", text: "Climatisation et froid" },
-        { icon: "fas fa-square", text: "Marbre" },
-        { icon: "fas fa-shield-alt", text: "Inox" },
-        { icon: "fas fa-tint", text: "Etanchéité" },
-        { icon: "fas fa-solar-panel", text: "Energie Solaire" },
-        { icon: "fas fa-video", text: "Vidéo-surveillance" },
-      ];
+
+    const [categories , setCategories] = useState([]);
+    const [services , setServices] = useState([]);
+
+      useEffect(()=>{
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:8000/api/categories',
+          };
+
+          axios.request(config)
+          .then((response) => {
+            setCategories(response.data)
+            // console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+    },[])
+
+      useEffect(()=>{
+        let config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: 'http://localhost:8000/api/services',
+          };
+
+          axios.request(config)
+          .then((response) => {
+            setServices(response.data)
+            // console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+    },[])
+
+    const auth = localStorage.getItem('role');
+    const { t } = useTranslation();
+
   return (
-    <>
-    <Header/>
+    <div className="bg-gray-100">
+         {auth === "prestataire" ? (
+        <HeaderPres />
+      ) : auth === "client" ? (
+        <HeaderClient />
+      ) : auth == "admin" ?(
+        <DashboardHeader />
+      ) : (
+        <Header />
+      )}
         <section
       className="relative h-[500px] bg-cover bg-center"
       style={{ backgroundImage: `url(${img4})` }}
@@ -35,13 +75,11 @@ export default function Service() {
 
       {/* Content Container */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center">
-        <div className="relative z-10 container mx-auto px-4 h-full flex flex-col items-center justify-center">
-          <h1 className="text-white text-6xl font-bold mb-4">Nos services</h1>
-          <p className="text-white text-3xl">
-            Une large gamme de services professionnels à votre disposition
-          </p>
-        </div>
+      <div className="relative z-10 container mx-auto px-4 h-full flex flex-col items-center justify-center">
+        <h1 className="text-white text-6xl font-bold mb-4">{t('servicesTitle')}</h1>
+        <p className="text-white text-3xl">{t('servicesDescription')}</p>
       </div>
+    </div>
       <SearchBar/>
    </section>
 
@@ -49,330 +87,53 @@ export default function Service() {
        <div className="h-16"></div>
 
 {/* Services Domestiques Section */}
-<section className="py-16 bg-gray-100">
-  <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-    {/* Section Title */}
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-        Services Domestiques
-      </h2>
-      <div className="h-0.5 bg-orange-400"></div>
-    </div>
-
-    {/* Services Layout */}
-    <div className="flex flex-wrap gap-6">
-      {/* Each service as a link */}
-      {[
-        { icon: "fas fa-broom", text: "Ménage" },
-        { icon: "fas fa-leaf", text: "Jardinage" },
-        { icon: "fas fa-bolt", text: "Electricité" },
-        { icon: "fas fa-faucet", text: "Plomberie" },
-        { icon: "fas fa-hammer", text: "Menuiserie Bois" },
-        { icon: "fas fa-window-maximize", text: "Menuiserie Aluminium" },
-        { icon: "fas fa-paint-roller", text: "Peinture et décoration" },
-        { icon: "fas fa-bug", text: "Contrôle des nuisibles" },
-        { icon: "fas fa-blender", text: "Réparation appareil électroménager" },
-        { icon: "fas fa-couch", text: "Assemblage des meubles" },
-        { icon: "fas fa-tv", text: "Installation TV et accessoires électroniques" },
-        { icon: "fas fa-clone", text: "Miroiterie" },
-        { icon: "fas fa-truck", text: "Déménagement" },
-        { icon: "fas fa-solar-panel", text: "Energie solaire" },
-        { icon: "fas fa-scroll", text: "Tapisserie" },
-        { icon: "fas fa-key", text: "Serrurier" },
-        { icon: "fas fa-car", text: "Mécanique Auto" },
-      ].map((service, index) => (
-        <Link
-            to='/servicePageDesc' // Replace `service.link` with the appropriate path
-            key={index}
-            className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-            <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-            <span className="text-gray-700 text-sm">{service.text}</span>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
-
-<section className="bg-gray-100">
-      <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-            Services d &rsquo;accompagnement
-          </h2>
-          <div className="h-0.5 bg-orange-400"></div>
-        </div>
-
-        {/* Services Layout */}
-        <div className="flex flex-wrap gap-6">
-          {[
-            { icon: "fas fa-baby", text: "Garde d'enfants" },
-            { icon: "fas fa-paw", text: "Garde d'animaux" },
-            { icon: "fas fa-cut", text: "Toilettage d'animaux" },
-            { icon: "fas fa-user-nurse", text: "Aide aux personnes âgées" },
-            { icon: "fas fa-hand-holding-medical", text: "Kinésithérapie" },
-            { icon: "fas fa-heartbeat", text: "Soins à domicile" },
-            { icon: "fas fa-book", text: "Cours à domicile" },
-            { icon: "fas fa-music", text: "Cours de musique" },
-          ].map((service, index) => (
-            <a
-              href="#"
-              key={index}
-              className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-              <span className="text-gray-700 text-sm">{service.text}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section className="py-16 bg-gray-100">
-      <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-            Rénovations résidentielles
-          </h2>
-          <div className="h-0.5 bg-orange-400"></div>
-        </div>
-
-        {/* Services Layout */}
-        <div className="flex flex-wrap gap-6">
-          {services.map((service, index) => (
-            <a
-              href="#"
-              key={index}
-              className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-              <span className="text-gray-700 text-sm">{service.text}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-
-    <section className="bg-gray-100">
-      <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-            Services Personnels et Bien-être
-          </h2>
-          <div className="h-0.5 bg-orange-400"></div>
-        </div>
-
-        {/* Services Layout */}
-        <div className="flex flex-wrap gap-6">
-          {[
-                { icon: "fas fa-running", text: "Coaching Sportif" },
-                { icon: "fas fa-brain", text: "Coaching mental" },
-                { icon: "fas fa-apple-alt", text: "Diététique et nutrition" },
-                { icon: "fas fa-spa", text: "Thérapie par massage" },
-                { icon: "fas fa-hand-holding-medical", text: "Kinésithérapie" },
-                { icon: "fas fa-cut", text: "Coiffeur à domicile" },
-            ].map((service, index) => (
-            <a
-              href="#"
-              key={index}
-              className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-              <span className="text-gray-700 text-sm">{service.text}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-
-    <section className="py-16">
-      <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-            Services Événements
-          </h2>
-          <div className="h-0.5 bg-orange-400"></div>
-        </div>
-
-        {/* Services Layout */}
-        <div className="flex flex-wrap gap-6">
-          {[
-                { icon: "fas fa-female", text: "Hôtesses" },
-                { icon: "fas fa-concierge-bell", text: "Serveurs" },
-                { icon: "fas fa-hat-chef", text: "Chef à domicile" },
-                { icon: "fas fa-utensils", text: "Traiteurs" },
-                { icon: "fas fa-guitar", text: "Orchestres" },
-                { icon: "fas fa-music", text: "Disc Jockey (DJ)" },
-                { icon: "fas fa-gem", text: "Negafa et cérémonies de mariage" },
-                { icon: "fas fa-camera", text: "Photographes et cameraman" },
-            ].map((service, index) => (
-            <a
-              href="#"
-              key={index}
-              className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-              <span className="text-gray-700 text-sm">{service.text}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-
-    <section className="bg-gray-100 py-16">
-      <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-        {/* Section Title */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
-            Services Informatiques
-          </h2>
-          <div className="h-0.5 bg-orange-400"></div>
-        </div>
-
-        {/* Services Layout */}
-        <div className="flex flex-wrap gap-6">
-          {[
-                { icon: "fas fa-laptop-medical", text: "Assistance Informatique" },
-                { icon: "fas fa-code", text: "Design des sites Web" },
-                { icon: "fas fa-pencil-alt", text: "Copywriting et SEO" },
-                { icon: "fas fa-shopping-cart", text: "e-Commerce" },
-            ].map((service, index) => (
-            <a
-              href="#"
-              key={index}
-              className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <i className={`${service.icon} text-blue-500 w-5 h-5`}></i>
-              <span className="text-gray-700 text-sm">{service.text}</span>
-            </a>
-          ))}
-        </div>
-      </div>
-    </section>
-
-
-    <section className="py-16 bg-gray-100">
-  <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-    {/* Section Title */}
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">Services Professionnels</h2>
-      <div className="h-0.5 bg-orange-400"></div>
-    </div>
-
-    {/* Services Layout */}
-    <div className="flex flex-wrap gap-6">
-      {/* Architectes */}
-      <a href="#" className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all">
-        <i className="fas fa-drafting-compass text-blue-500 w-5 h-5"></i>
-        <span className="text-gray-700 text-sm">Architectes</span>
-      </a>
-
-      {/* Design Graphique */}
-      <a href="#" className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all">
-        <i className="fas fa-palette text-blue-500 w-5 h-5"></i>
-        <span className="text-gray-700 text-sm">Design Graphique</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<section className="bg-gray-100">
-  <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
-    {/* Section Title */}
-    <div className="mb-8">
-      <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">Services Juridiques</h2>
-      <div className="h-0.5 bg-orange-400"></div>
-    </div>
-
-    {/* Services Layout */}
-    <div className="flex flex-wrap gap-6">
-      {[
-        {
-          href: "#",
-          iconClass: "fas fa-balance-scale",
-          label: "Avocats"
-        },
-        {
-          href: "#",
-          iconClass: "fas fa-stamp",
-          label: "Notaires"
-        },
-        {
-          href: "#",
-          iconClass: "fas fa-file-signature",
-          label: "Adoul"
-        },
-        {
-          href: "#",
-          iconClass: "fas fa-gavel",
-          label: "Huissier de justice"
-        },
-        {
-          href: "#",
-          iconClass: "fas fa-calculator",
-          label: "Comptabilité et tenue des livres"
-        }
-      ].map((service, index) => (
-        <a
-          key={index}
-          href={service.href}
-          className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
-        >
-          <i className={`${service.iconClass} text-blue-500 w-5 h-5`}></i>
-          <span className="text-gray-700 text-sm">{service.label}</span>
-        </a>
-      ))}
-    </div>
-  </div>
-</section>
-
-<section className="bg-gray-100 py-32">
-  <div className="max-w-[75%] mx-auto">
-    {/* Testimonial Container */}
-    <div className="relative flex items-center justify-center min-h-[200px]">
-      {/* Previous Button */}
-      <button className="absolute left-0 p-3 rounded-full bg-[#4052B4] text-white hover:bg-[#324092] transition-colors">
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/>
-        </svg>
-      </button>
-
-      {/* Testimonial Content */}
-      <div className="text-center max-w-3xl px-4">
-        {/* Profile Image */}
-        <div>
-          <img src="image/img3.png" alt="Anouar.A" className="w-24 h-24 mx-auto"/>
-        </div>
-
-        {/* Name */}
-        <h3 className="text-2xl font-semibold text-[#4052B4] mb-2">Anouar.A</h3>
-
-        {/* Testimonial Text */}
-        <p className="text-gray-700 text-lg leading-relaxed font-light italic">
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-        </p>
+{categories.map((cat, index) => (
+  <section key={index} className="py-16 bg-gray-100">
+    <div className="max-w-[1400px] mx-auto bg-white rounded-xl p-8">
+      {/* Section Title */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-[#4052B4] mb-4">
+          {cat.nom}
+        </h2>
+        <div className="h-0.5 bg-orange-400"></div>
       </div>
 
-      {/* Next Button */}
-      <button className="absolute right-0 p-3 rounded-full bg-[#4052B4] text-white hover:bg-[#324092] transition-colors">
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/>
-        </svg>
-      </button>
+      {/* Services Layout */}
+      <div className="flex flex-wrap gap-6">
+        {/* Each service as a link */}
+        {services.map((ser, index) => {
+          if (ser.category_id === cat.id) {
+            return (
+              <Link
+              to={`/servicePageDesc/${ser.serviceName}`} // Replace with the appropriate path
+                key={index}
+                className="flex items-center space-x-3 px-4 py-2 bg-[#f8fafc] rounded-lg border border-gray-200 hover:shadow-md transition-all"
+              >
+               <i className={`text-blue-500 w-5 h-5 `}>
+               <img
+                    src={`http://127.0.0.1:8000/${ser.icon}`}
+                    alt="Icon"
+                    className="w-5 h-5 object-cover"
+                    />
+                </i>{/* Add the appropriate icon here */}
+                <span className="text-gray-700 text-sm">{t(`servicesDy.${ser.serviceName}`)}</span>
+              </Link>
+            );
+          }
+          return null; // Return null if the condition is not met (i.e., the category doesn't match)
+        })}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+))}
+
+
+
+
+
 
 <Footer/>
-    </>
+    </div>
 
 
   )

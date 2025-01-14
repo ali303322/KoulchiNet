@@ -36,7 +36,20 @@ import Security from "../Components/Security";
 import ChoosePlan from "../Components/ChoosePlan";
 import InscriptionPrestataire from "../Components/InscriptionPrestataire";
 import InscriptionClient from "../Components/InscriptionClient";
-
+import Transaction from "../Components/Transaction";
+import SendingResponce from "../Components/SendingResponce";
+import ProtectedRoute from "./ProtectedRoute";
+import Unauthorized from "../Components/Unauthorized";
+import ModifyClient from "../Components/ModifyClient";
+import ConditionGeneral from "../Components/ConditionGeneral";
+import PolitiquesPage from "../Components/PolitiquesPage";
+import PresHistoryDetails from "../Components/PresHistoryDetails";
+import TransactionDetails from "../Components/TransactionDetails";
+import ForgotPassword from "../Components/ForgotPassword";
+import ChangePassword from "../Components/ChangePassword";
+import GestionPaiment from "../Components/GestionPaiment";
+import PaimentDetailes from "../Components/PaimentDetailes";
+import Chat from "../Components/chat/Chat";
 
 export const Router = createBrowserRouter([
     {
@@ -54,6 +67,14 @@ export const Router = createBrowserRouter([
     {
         path : '/SignIn',
         element : <SignIn/>
+    },
+    {
+        path : '/MotDePasseOublier',
+        element : <ForgotPassword/>
+    },
+    {
+        path : '/Modifier-password',
+        element : <ChangePassword/>
     },
     {
         path : '/AboutUs',
@@ -84,64 +105,143 @@ export const Router = createBrowserRouter([
         element : <Vueprofil/>
     },
     {
+        path : '/Unauthorized',
+        element : <Unauthorized/>
+    },
+    {
+        path : '/ConditionGeneral',
+        element : <ConditionGeneral/>
+    },
+    {
+        path : '/PolitiqueEtConfidentialite',
+        element : <PolitiquesPage/>
+    },
+    {
         path : '/AdminDashboard',
-        element : <AdminDashboard/>
+        element :(
+            <ProtectedRoute roleRequired="admin">
+                <AdminDashboard/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/AdminDashboard/AddProduits',
-        element : <AddProduit/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <AddProduit/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/AddContenu',
-        element : <AddContenu/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <AddContenu/>
+            </ProtectedRoute>)
     },
     {
-        path : '/AdminDashboard/EditProduits', //param
-        element : <EditProduit/>
+        path : '/AdminDashboard/EditProduits/:id', //param
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <EditProduit/>
+            </ProtectedRoute>)
     },
     {
-        path : '/AdminDashboard/EditContenu',
-        element : <EditContenu/>
+        path : '/AdminDashboard/EditContenu/:id',
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <EditContenu/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/UpgradeDemande',
-        element : <UpgradeDemande/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <UpgradeDemande/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/EditPrestataire',
-        element : <ModifyPrestataire/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <ModifyPrestataire/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/DemandeDetails', //param
-        element : <DemandeDetails/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <DemandeDetails/>
+            </ProtectedRoute>)
     },
     {
-        path : '/AdminDashboard/DetailsContenu',
-        element : <DetailsContenu/>
+        path : '/AdminDashboard/DetailsContenu/:id',
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <DetailsContenu/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/GestionClient',
-        element : <GestionClient/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <GestionClient/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/GestionContenu',
-        element : <GestionContenu/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <GestionContenu/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/GestionProduit',
-        element : <GestionProduit/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <GestionProduit/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/GestionPrestataire',
-        element : <GestionPrestataire/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <GestionPrestataire/>
+            </ProtectedRoute>)
+    },
+    {
+        path : '/AdminDashboard/GestionPaiment',
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <GestionPaiment/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/PestataireDetails', //param
-        element : <PresDetails/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <PresDetails/>
+            </ProtectedRoute>)
+    },
+    {
+        path : '/AdminDashboard/PaimentDetaille/:id', //param
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <PaimentDetailes/>
+            </ProtectedRoute>)
     },
     {
         path : '/AdminDashboard/ClientDetails', //param
-        element : <ClientDetails/>
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <ClientDetails/>
+            </ProtectedRoute>)
+    },
+    {
+        path : '/AdminDashboard/TransactionsDetails/:id', //param
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <TransactionDetails/>
+            </ProtectedRoute>)
     },
 
 
@@ -149,54 +249,131 @@ export const Router = createBrowserRouter([
 
     {
         path : '/ClientDashboard',
-        element : <ClientDashboard/>
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <ClientDashboard/>
+            </ProtectedRoute>
+            )
     },
     {
-        path : '/ClientDashboard/Review', //param
-        element : <Review/>
+        path : '/ClientDashboard/Review/:id', 
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <Review/>
+            </ProtectedRoute>)
     },
     {
         path : '/ClientDashboard/securityClient',
-        element : <SecuriteClient/>
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <SecuriteClient/>
+            </ProtectedRoute>)
     },
     {
         path : '/ClientDashboard/HistoriqueClient',
-        element : <HistoriqueClient/>
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <HistoriqueClient/>
+            </ProtectedRoute>)
+    },
+    {
+        path : '/ClientDashboard/modifyClient',
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <ModifyClient/>
+            </ProtectedRoute>)
     },
 
 
 
     {
         path : '/PrestataireDashboard/security',
-        element : <Security/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <Security/>
+            </ProtectedRoute>
+        )
+    },
+    {
+        path : '/PrestataireDashboard/DetailsHistorie/:id',
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <PresHistoryDetails/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/PrestataireDashboard',
-        element : <PrestataireDashboard/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <PrestataireDashboard/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/PrestataireDashboard/Historique',
-        element : <HistoriquePres/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <HistoriquePres/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/PrestataireDashboard/Plans',
-        element : <Plans/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <Plans/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/PrestataireDashboard/modifyPrestataire',
-        element : <ModifyPrestataire/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <ModifyPrestataire/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/PrestataireDashboard/Plans/submitPlan',
-        element : <ChoosePlan/>
+        element : (
+            <ProtectedRoute roleRequired="prestataire">
+                <ChoosePlan/>
+            </ProtectedRoute>
+        )
     },
     {
         path : '/InscriptionPrestataire',
-        element : <InscriptionPrestataire/>
+        element :<InscriptionPrestataire/>
     },
     {
         path : '/InscriptionClient',
         element : <InscriptionClient/>
+    },
+
+    {
+        path : '/AdminDashboard/Transaction',
+        element : (
+            <ProtectedRoute roleRequired="admin">
+                <Transaction/>
+            </ProtectedRoute>
+        )
+    },
+    {
+        path : '/sendingResponce',
+        element : (
+            <ProtectedRoute roleRequired="client">
+                <SendingResponce/>
+            </ProtectedRoute>
+        )
+    },
+    {
+        path : '/Chat',
+        element :(
+            <ProtectedRoute roleRequired={['client','prestataire']}>
+            <Chat/>
+            </ProtectedRoute>
+            )
     },
 ])
 

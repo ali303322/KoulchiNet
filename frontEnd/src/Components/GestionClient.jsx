@@ -1,23 +1,60 @@
 // import React from 'react'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SIdeBar from "./SIdeBar";
 import { Link } from "react-router-dom";
+import DashboardHeader from "./DashboardHeader";
+import axios from "axios";
 
 export default function GestionClient() {
     const [currentPage, setCurrentPage] = useState(1);
-    const users = [
-      { name: "Achraf Amrani", date: "27/10/2024 AT 12:50AM", status: "Active" },
-      { name: "Mohammed Ali", date: "27/10/2024 AT 12:50AM", status: "Active" },
-      // Add more user data as needed
-    ];
+    const [totalPages, setTotalPages] = useState(1);
+    const[clients,setClients]=useState([]);
 
-    const handlePageChange = (page) => {
-      setCurrentPage(page);
-      // Logic to fetch or display data for the selected page
-    };
+    useEffect(() => {
+        getClients(currentPage);
+      }, [currentPage]);
+
+
+
+      const getClients = async (page) => {
+        try {
+          const response = await axios.get(`http://127.0.0.1:8000/api/getclients?page=${page}`);
+          setClients(response.data.data); // Access the "data" key
+          setTotalPages(response.data.last_page); // Access "last_page" for total pages
+        } catch (error) {
+          console.error("Error fetching clients:", error);
+        }
+      };
+
+
+      const handlePreviousPage = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+      };
+
+      const handleNextPage = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+      };
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+
+      if (isNaN(date)) {
+        return "Date invalide";
+      }
+
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Les mois commencent à 0
+      const day = String(date.getDate()).padStart(2, '0');
+
+      return `${year}-${month}-${day}`;
+    }
+
 
     return (
+      <>
+      <DashboardHeader/>
       <div className="bg-gray-100 min-h-screen flex">
        <SIdeBar/>
 
@@ -38,15 +75,15 @@ export default function GestionClient() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {users.map((user, index) => (
+                  {clients.map((client, index) => (
                     <tr key={index}>
-                      <td className="py-4 px-6">{user.name}</td>
-                      <td className="py-4 px-6">{user.date}</td>
+                      <td className="py-4 px-6">{client.prenom} {client.nom}</td>
+                      <td className="py-4 px-6">{formatDate(client.created_at) }</td>
                       <td className="py-4 px-6">
-                        <span className="text-green-500">{user.status}</span>
+                        <span className={client.email_verified_at ? "text-green-500" : "text-red-500"}>{client.email_verified_at?"Active":"inactive"}</span>
                       </td>
                       <td className="py-4 px-6">
-                      <Link to="/AdminDashboard/ClientDetails" className="text-[#4a69bd] hover:text-blue-700">
+                      <Link   to="/AdminDashboard/ClientDetails" className="text-[#4a69bd] hover:text-blue-700" state={{ "id": client.id }}>
                         Details
                         </Link>
                       </td>
@@ -56,31 +93,31 @@ export default function GestionClient() {
               </table>
             </div>
 
-            {/* Pagination */}
             <div className="flex justify-center mt-6 space-x-2">
               <button
+                onClick={handlePreviousPage}
                 className="px-4 py-2 bg-[#4a69bd] text-white rounded disabled:bg-gray-400"
                 disabled={currentPage === 1}
-                onClick={() => handlePageChange(currentPage - 1)}
               >
                 Précédent
               </button>
-              {[1, 2, 3].map((page) => (
+              {[...Array(totalPages)].map((_, i) => (
                 <button
-                  key={page}
-                  className={`px-4 py-2 rounded ${
-                    currentPage === page
-                      ? "bg-blue-500 text-white"
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-2 ${
+                    currentPage === i + 1
+                      ? "bg-blue-700 text-white"
                       : "bg-[#4a69bd] text-white"
-                  }`}
-                  onClick={() => handlePageChange(page)}
+                  } rounded`}
                 >
-                  {page}
+                  {i + 1}
                 </button>
               ))}
               <button
-                className="px-4 py-2 bg-[#4a69bd] text-white rounded"
-                onClick={() => handlePageChange(currentPage + 1)}
+                onClick={handleNextPage}
+                className="px-4 py-2 bg-[#4a69bd] text-white rounded disabled:bg-gray-400"
+                disabled={currentPage === totalPages}
               >
                 Suivant
               </button>
@@ -88,6 +125,7 @@ export default function GestionClient() {
           </div>
         </div>
       </div>
+      </>
   )
 }
 

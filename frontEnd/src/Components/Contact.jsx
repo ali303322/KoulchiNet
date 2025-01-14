@@ -1,16 +1,46 @@
 // import React from 'react'
 
+import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
+import img4 from "./image/img4.jpeg";
+import axios from "axios";
 
 export default function Contact() {
+  const [nomComplet,setNomComplet] = useState('');
+  const [email,setEmail] = useState('');
+  const [subject,setSubject] = useState('');
+  const [Message,setMessage] = useState('');
+  const [manage,setManage] = useState('');
+
+
+    const handleSubmit = ()=>{
+        const formData = new FormData();
+        formData.append('NomComplet',nomComplet);
+        formData.append('email',email);
+        formData.append('subjet',subject);
+        formData.append('message',Message);
+
+        if(formData){
+                axios.post('http://localhost:8000/api/contactMessage',formData)
+                .then(response=>{
+                    setManage(response.message);
+                    console.log(response.message);
+
+                }).catch(error=>{
+                    console.error(error);
+
+                });
+        }
+    }
+
   return (
     <>
     <Header/>
         {/* Hero Section */}
       <section
         className="relative h-[400px] bg-cover bg-center"
-        style={{ backgroundImage: "url('image/img4.jpeg')" }}
+        style={{ backgroundImage: `url(${img4})` }}
       >
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
@@ -30,12 +60,11 @@ export default function Contact() {
           <div className="mb-16">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Prendre contact</h2>
             <p className="text-gray-600">
-              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-              literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at
-              Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem
-              Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable
-              source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes
-              of Good and Evil) by Cicero, written in 45 BC.
+            Koulchinet est née de la vision passionnée par l'innovation et l'amélioration de la qualité de vie. Confronté moi-même aux défis de la gestion du quotidien, j'ai décidé de créer une solution qui rendrait l'accès aux services domestiques plus simple, plus rapide et plus fiable.
+            </p>
+            <br />
+            <p className="text-gray-600">
+            Koulchinet est née de la vision passionnée par l'innovation et l'amélioration de la qualité de vie. Confronté moi-même aux défis de la gestion du quotidien, j'ai décidé de créer une solution qui rendrait l'accès aux services domestiques plus simple, plus rapide et plus fiable.
             </p>
           </div>
         </div>
@@ -101,13 +130,15 @@ export default function Contact() {
             {/* Right Column - Contact Form */}
             <div className="w-full md:w-1/2 bg-[#4052B4] p-12">
               <h2 className="text-3xl font-semibold text-white mb-6">Contactez nous</h2>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Name Input */}
                 <div>
                   <input
                     type="text"
                     placeholder="Votre nom complet"
                     className="w-full px-6 py-4 rounded-full bg-[#5468C4] text-white placeholder-gray-300 focus:outline-none text-lg"
+                    onChange={(e)=>setNomComplet(e.target.value)}
+
                   />
                 </div>
 
@@ -117,6 +148,8 @@ export default function Contact() {
                     type="email"
                     placeholder="Votre email"
                     className="w-full px-6 py-4 rounded-full bg-[#5468C4] text-white placeholder-gray-300 focus:outline-none text-lg"
+                    onChange={(e)=>setEmail(e.target.value)}
+
                   />
                 </div>
 
@@ -126,6 +159,8 @@ export default function Contact() {
                     type="text"
                     placeholder="Sujet"
                     className="w-full px-6 py-4 rounded-full bg-[#5468C4] text-white placeholder-gray-300 focus:outline-none text-lg"
+                    onChange={(e)=>setSubject(e.target.value)}
+
                   />
                 </div>
 
@@ -134,6 +169,8 @@ export default function Contact() {
                   <textarea
                     placeholder="Votre message"
                     className="w-full px-6 py-4 rounded-3xl bg-[#5468C4] text-white placeholder-gray-300 focus:outline-none resize-none text-lg"
+                    onChange={(e)=>setMessage(e.target.value)}
+
                     style={{ minHeight: "150px" }}
                   ></textarea>
                 </div>
@@ -141,8 +178,9 @@ export default function Contact() {
                 {/* Submit Button */}
                 <div>
                   <button
-                    type="submit"
+                    type="button"
                     className="w-full px-8 py-4 bg-white text-[#4052B4] rounded-full font-semibold hover:bg-gray-100 transition-colors text-lg"
+                    onClick={handleSubmit}
                   >
                     Envoyer
                   </button>

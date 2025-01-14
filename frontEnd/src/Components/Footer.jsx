@@ -27,13 +27,38 @@ const Footer = () => {
                 <div className="space-y-8">
                     <h4 className="text-sm font-bold mb-6">Pages</h4>
                     <ul className="space-y-2">
-                        {["Acceuil", "Marketplace", "A propos", "Admin", "Prestataire dashboard", "Client dashboard"].map((page) => (
-                            <li key={page}>
-                                <a href="#" className="text-gray-300 hover:text-[#4A69BD]">
-                                    {page}
-                                </a>
+                        {/* {["Acceuil", "Marketplace", "A propos", "Admin", "Prestataire dashboard", "Client dashboard"].map((page) => ( */}
+                            <li>
+                                <Link to="/" className="text-gray-300 hover:text-[#4A69BD]">
+                                    Acceuil
+                                </Link>
                             </li>
-                        ))}
+                            <li>
+                                <Link to="/Marketplace" className="text-gray-300 hover:text-[#4A69BD]">
+                                Marketplace
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/AboutUs" className="text-gray-300 hover:text-[#4A69BD]">
+                                A propos
+                                </Link>
+                            </li>
+                            {/* <li>
+                                <Link to="/" className="text-gray-300 hover:text-[#4A69BD]">
+                                Admin
+                                </Link>
+                            </li> */}
+                            <li>
+                                <Link to="/PrestataireDashboard" className="text-gray-300 hover:text-[#4A69BD]">
+                                Prestataire dashboard
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/ClientDashboard" className="text-gray-300 hover:text-[#4A69BD]">
+                                Client dashboard
+                                </Link>
+                            </li>
+                        {/* ))} */}
                     </ul>
                 </div>
 
@@ -52,9 +77,9 @@ const Footer = () => {
                             "Services Evénements",
                         ].map((service) => (
                             <li key={service}>
-                                <a href="#" className="text-gray-300 hover:text-[#4A69BD]">
+                                <p className="text-gray-300 hover:text-[#4A69BD]">
                                     {service}
-                                </a>
+                                </p>
                             </li>
                         ))}
                     </ul>
@@ -65,9 +90,14 @@ const Footer = () => {
                     <h4 className="text-sm font-bold mb-6">Assistance</h4>
                     <ul className="space-y-2">
                             <li>
-                                <a href="#" className="text-gray-300 hover:text-[#4A69BD]">
+                                <Link to="/ConditionGeneral" className="text-gray-300 hover:text-[#4A69BD]">
                                     condition general
-                                </a>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/PolitiqueEtConfidentialite" className="text-gray-300 hover:text-[#4A69BD]">
+                                    Politique et confidentialité
+                                </Link>
                             </li>
                             <li>
                                 <Link to="/Contact" className="text-gray-300 hover:text-[#4A69BD]">

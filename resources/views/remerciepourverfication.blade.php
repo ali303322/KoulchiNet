@@ -28,22 +28,23 @@
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: #0645a3;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             margin-top: 20px;
         }
         .btn:hover {
-            background-color: #45a049;
+            background-color: white;
+            color: #0645a3;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Merci!</h1>
+    <div class="container text-center mt-5">
+        <h1 class="text-success">Merci!</h1>
         <p>Votre e-mail a été vérifié avec succès.</p>
-   
+        <a href="{{$route}}" style="background-color: 1c2b6d" class="btn mt-3">Accéder au Dashboard</a>
     </div>
 </body>
 </html>

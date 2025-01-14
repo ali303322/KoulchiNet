@@ -1,64 +1,70 @@
 // import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import img5 from './image/img5.webp'
 import axios from 'axios';
-import bcrypt from "bcryptjs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export default function Login() {
 
-    const [users,Setusers] = useState([]);
     const [email,SetEmail] = useState();
     const [password,SetPassword] = useState();
     const [errorMessage, setErrorMessage] = useState("");
+    const [captchaVerified, setCaptchaVerified] = useState(false);
+
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        let config = {
-            method: 'get',
-            maxBodyLength: Infinity,
-            url: 'http://127.0.0.1:8000/api/users',
-            headers: { }
-          };
-
-          axios.request(config)
-          .then((response) => {
-            Setusers(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-    },[]);
+    const handleCaptchaChange = (value) => {
+        if (value) {
+          setCaptchaVerified(true);
+          }
+      };
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setErrorMessage("");
-        const foundUser = users.find((u) => u.email === email);
-        console.log(foundUser);
-        const isPasswordValid = await bcrypt.compare(password, foundUser.password);
-        if (foundUser && isPasswordValid) {
-                switch (foundUser.role) {
-                    case "Admin":
-                    //   console.log("Redirecting to Admin dashboard...");
-                    navigate('/AdminDashboard' , {state : foundUser});
-                      break;
-                    case "prestataire":
-                    //   console.log("Redirecting to Prestataire dashboard...");
-                    navigate('/PrestataireDashboard',{state : foundUser});
-                      break;
-                    case "Client":
-                    //   console.log("Redirecting to Client dashboard...");
-                    navigate('/ClientDashboard',{state : foundUser});
-                      break;
-                    default:
-                      setErrorMessage("Rôle utilisateur non reconnu.");
-        }
-        } else {
-            setErrorMessage("Email or password doesn't match to our database.");
+
+        if (!captchaVerified) {
+            setErrorMessage(true);
+             alert("Veuillez vérifier le captcha..");
+             return;
         }
 
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+              email: email,
+              password: password,
+            });
 
+            console.log('Login Successful:', response.data);
+
+            // Store the token and user role (optional)
+            const { token, role, user } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('role', role);
+            localStorage.setItem('user', JSON.stringify(user));
+
+            const tempData = sessionStorage.getItem('formData');
+
+            if (tempData) {
+                navigate("/sendingResponce", { state: tempData });
+                sessionStorage.removeItem('tempData');
+            } else if (role === "admin") {
+                navigate("/AdminDashboard");
+            } else if (role === "prestataire") {
+                navigate("/PrestataireDashboard");
+            } else if (role === "client") {
+                navigate("/ClientDashboard");
+            }
+          } catch (error) {
+            if (error.response) {
+              console.error('Error:', error.response.data.error);
+              alert(error.response.data.error || 'Login failed');
+            } else {
+              console.error('Network Error:', error.message);
+              alert('Network error, please try again.');
+            }
+          }
   };
 
 
@@ -101,7 +107,10 @@ export default function Login() {
               required
             />
           </div>
-
+        <ReCAPTCHA
+            sitekey="6LfwYpUqAAAAAA93-dRYjO5GuGBXspxx6mtEHY5N" // replace with your site key from Google
+            onChange={handleCaptchaChange}
+        />
           {/* Sign Up Button */}
           <button
             type="submit"
@@ -116,19 +125,13 @@ export default function Login() {
             <span className="absolute bg-white px-4 text-gray-500">ou</span>
           </div>
 
-          {/* Google Sign In */}
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-3 px-6 py-4 border border-gray-300 rounded-full hover:bg-gray-50 transition-colors"
-          >
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo" className="w-5 h-5" />
-            <span className="text-gray-700">Continue avec Google</span>
-          </button>
-
           {/* Login Link */}
           <p className="text-center text-gray-600 mt-6">
-            Vous n &rsquo; avez pas un compte ?
-            <a href="signin.html" className="text-[#4052B4] hover:underline">S &rsquo;      inscrire</a>
+            Vous n&rsquo;avez pas un compte ?
+            <Link to="/InscriptionClient" className="text-[#4052B4] hover:underline">S&rsquo;inscrire</Link>
+          </p>
+          <p className="text-center text-gray-600 mt-6">
+            <Link to="/MotDePasseOublier" className="text-[#4052B4] hover:underline">Mot de passe oublié ?</Link>
           </p>
         </form>
       </div>

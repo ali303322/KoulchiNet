@@ -2,9 +2,43 @@
 
 import { Link } from "react-router-dom";
 import SIdeBar from "./SIdeBar";
+import DashboardHeader from "./DashboardHeader";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function GestionPrestataire() {
+
+  const[prestataire,setPrestataire]=useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    fetchPrestataires(currentPage);
+  }, [currentPage]);
+
+  const fetchPrestataires = (page) => {
+    axios
+      .get(`http://127.0.0.1:8000/api/getAllPrestataire?page=${page}`)
+      .then((res) => {
+        setPrestataire(res.data.prestataire);
+        setTotalPages(res.data.totalPages); // Ensure your API returns total pages
+      })
+      .catch((err) => console.log(err));
+  };
+
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+
   return (
+    <>
+      <DashboardHeader/>
     <div className="flex min-h-screen">
    <SIdeBar/>
 
@@ -24,21 +58,17 @@ export default function GestionPrestataire() {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {[
-              { name: "Reda Ahmed", offer: "Free", status: "Active", isActive: true },
-              { name: "Achraf Amrani", offer: "Free", status: "Inactive", isActive: false },
-              { name: "Achraf Amrani", offer: "Entreprise", status: "Active", isActive: true },
-            ].map((row, index) => (
+          {prestataire&&prestataire.map((row, index) => (
               <tr key={index}>
-                <td className="py-4 px-6">{row.name}</td>
-                <td className="py-4 px-6">{row.offer}</td>
+                <td className="py-4 px-6">{row.prenom} {row.nom}</td>
+                <td className="py-4 px-6">free</td>
                 <td className="py-4 px-6">
-                  <span className={row.isActive ? "text-green-500" : "text-red-500"}>
-                    {row.status}
+                  <span className={row.is_approved ? "text-green-500" : "text-red-500"}>
+                    {row.is_approved?"active":"inactive"}
                   </span>
                 </td>
                 <td className="py-4 px-6">
-                <Link to="/AdminDashboard/PestataireDetails" className="text-[#4a69bd] hover:text-blue-700">
+                <Link to="/AdminDashboard/PestataireDetails" className="text-[#4a69bd] hover:text-blue-700" state={{ "id": row.id }}>
   Details
 </Link>
                 </td>
@@ -47,21 +77,38 @@ export default function GestionPrestataire() {
           </tbody>
         </table>
 
-        {/* Pagination */}
         <div className="flex justify-center mt-6 space-x-2">
-          <button
-            className="px-4 py-2 bg-[#4a69bd] text-white rounded disabled:bg-gray-400"
-            disabled
-          >
-            Précédent
-          </button>
-          <button className="px-4 py-2 bg-[#4a69bd] text-white rounded">1</button>
-          <button className="px-4 py-2 bg-[#4a69bd] text-white rounded">2</button>
-          <button className="px-4 py-2 bg-[#4a69bd] text-white rounded">3</button>
-          <button className="px-4 py-2 bg-[#4a69bd] text-white rounded">Suivant</button>
-        </div>
+              <button
+                onClick={handlePreviousPage}
+                className="px-4 py-2 bg-[#4a69bd] text-white rounded disabled:bg-gray-400"
+                disabled={currentPage === 1}
+              >
+                Précédent
+              </button>
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`px-4 py-2 ${
+                    currentPage === i + 1
+                      ? "bg-blue-700 text-white"
+                      : "bg-[#4a69bd] text-white"
+                  } rounded`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button
+                onClick={handleNextPage}
+                className="px-4 py-2 bg-[#4a69bd] text-white rounded disabled:bg-gray-400"
+                disabled={currentPage === totalPages}
+              >
+                Suivant
+              </button>
+            </div>
       </div>
     </div>
   </div>
+  </>
   )
 }
