@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import img2 from './image/img2.jpeg';
+// import img2 from './image/img2.jpeg';
 import img10 from './image/hand-holding-question-mark.jpg';
 import img1 from './image/Accueil.webp';
 import SearchBar from "./SearchBar";

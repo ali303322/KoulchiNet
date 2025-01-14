@@ -100,65 +100,64 @@ class HistoryController extends Controller
                     if ($prestataireDecreese->NbrOffres > 0) {
                         $prestataireDecreese->NbrOffres -= 1;
                         $prestataireDecreese->save();
+                    }
 
         $prestataire = Prestataire::select('email', 'nom', 'prenom', 'telephone')
         ->find($validatedData['prestataire_id']);
 
-    $client = Client::select('email', 'nom', 'prenom', 'telephone')
-        ->find($validatedData['client_id']);
+        $client = Client::select('email', 'nom', 'prenom', 'telephone')
+            ->find($validatedData['client_id']);
 
-    if (!$prestataire || !$prestataire->email) {
-        return response()->json(['error' => 'Prestataire not found or missing email.'], 404);
-    }
+        if (!$prestataire || !$prestataire->email) {
+            return response()->json(['error' => 'Prestataire not found or missing email.'], 404);
+        }
 
-    if (!$client) {
-        return response()->json(['error' => 'Client not found.'], 404);
-    }
+        if (!$client) {
+            return response()->json(['error' => 'Client not found.'], 404);
+        }
 
-    // Prepare email data
-    $mailData = [
-        'prestataireName' => $prestataire->nom,
-        'clientName' => $client->nom,
-        'telefoneClient' => $client->telephone,
-        'telefonePres' => $prestataire->telephone,
-        'clientPrenom' => $client->prenom,
-        'prestatairePrenom' => $prestataire->prenom,
-    ];
+        // Prepare email data
+        $mailData = [
+            'prestataireName' => $prestataire->nom,
+            'clientName' => $client->nom,
+            'telefoneClient' => $client->telephone,
+            'telefonePres' => $prestataire->telephone,
+            'clientPrenom' => $client->prenom,
+            'prestatairePrenom' => $prestataire->prenom,
+        ];
 
-    try {
-        // Send emails
-        Mail::send('newDemande', ['mailData' => $mailData], function ($message) use ($prestataire) {
-            $message->to($prestataire->email)
-                ->subject('Nouvelle Demande de Service');
-        });
+        try {
+            // Send emails
+            Mail::send('newDemande', ['mailData' => $mailData], function ($message) use ($prestataire) {
+                $message->to($prestataire->email)
+                    ->subject('Nouvelle Demande de Service');
+            });
 
-        Mail::send('messageSent', ['mailData' => $mailData], function ($message) use ($client) {
-            $message->to($client->email)
-                ->subject('Votre demande de service a été envoyée');
-        });
+            Mail::send('messageSent', ['mailData' => $mailData], function ($message) use ($client) {
+                $message->to($client->email)
+                    ->subject('Votre demande de service a été envoyée');
+            });
 
-        Mail::send('TransactionMessage', ['mailData' => $mailData], function ($message) use ($client) {
-            $message->to('achtik5819@gmail.com')
-                ->subject('Nouvelle transaction a envoyer ');
-        });
-    } catch (\Exception $e) {
-        return response()->json(['error' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
-    }
+            Mail::send('TransactionMessage', ['mailData' => $mailData], function ($message) use ($client) {
+                $message->to('achtik5819@gmail.com')
+                    ->subject('Nouvelle transaction a envoyer ');
+            });
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
+        }
 
 
             return response()->json([
                 'message' => 'History record and images added successfully.',
                 'data' => $history->load('images'), // Load associated images
             ], 201);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Failed to add history record.',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+    }catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Failed to add history record.',
+            'error' => $e->getMessage(),
+        ], 500);
     }
-
+}
 
 
     public function getHistoryData($id){

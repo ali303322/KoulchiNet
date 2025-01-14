@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 
 export default function SendingResponce() {
     const [submissionDate, setSubmissionDate] = useState("");
@@ -80,10 +80,10 @@ export default function SendingResponce() {
                   withCredentials: true, // Remove if not required
                 }
               );
-
+              console.log(response.data);
               alert("Demande envoyée avec succès:");
               sessionStorage.clear();
-              
+
             } catch (error) {
               if (error.response) {
                 console.error("Erreur réponse serveur:", error.response.data);

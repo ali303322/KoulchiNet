@@ -1,9 +1,9 @@
 // import React from 'react'
 import KoulshiNet from "./image/Koulshinet.com (1).png"
-import React, { useCallback, useEffect, useState } from "react";
-import img3 from "./image/img3.png"
+import { useEffect, useState } from "react";
+// import img3 from "./image/img3.png"
 import { Link } from "react-router-dom";
-import { data } from "autoprefixer";
+// import { data } from "autoprefixer";
 import { useTranslation } from "react-i18next";
 export default function HeaderPres() {
     // const [isDropdownOpen, setIsDropdownOpen] = useState(false);

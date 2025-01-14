@@ -4,8 +4,8 @@
 import { useEffect, useState } from "react";
 import HeaderPres from "./HeaderPres";
 import SideBarPres from "./SideBarPres";
-import img3 from "./image/img3.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+// import img3 from "./image/img3.png";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 export default function PrestataireDashboard() {
@@ -19,10 +19,7 @@ export default function PrestataireDashboard() {
 
     const { t } = useTranslation();
 
-    if (!token) {
-         navigate("login");
-        return
-     }
+
      const checkIfPrestataireExistsAndAproved=async()=>{
          try {
              const response = await axios.post(
@@ -54,7 +51,10 @@ export default function PrestataireDashboard() {
 
     useEffect(()=>{checkIfPrestataireExistsAndAproved()},[])
 
-    // console.log(dispo);
+    if (!token) {
+        navigate("login");
+       return
+    }
 
 
     return (
@@ -195,9 +195,9 @@ export default function PrestataireDashboard() {
 <div className="bg-gray-100 h-screen flex justify-center items-center">
 
 <div className="bg-white p-6 rounded-lg shadow-md text-center max-w-md w-full">
-        <h2 className="text-xl font-semibold text-gray-700">Vérification de l'Email en Attente</h2>
-        <p className="text-gray-600 mt-4">Votre compte est en attente d'approbation. Veuillez vérifier votre email pour la validation.</p>
-        <p className="text-sm text-gray-400 mt-2">Si vous n'avez pas reçu l'email, vérifiez votre dossier spam.</p>
+        <h2 className="text-xl font-semibold text-gray-700">Vérification de l&rsquo;Email en Attente</h2>
+        <p className="text-gray-600 mt-4">Votre compte est en attente d&rsquo;approbation. Veuillez vérifier votre email pour la validation.</p>
+        <p className="text-sm text-gray-400 mt-2">Si vous n&rsquo;avez pas reçu l&rsquo;email, vérifiez votre dossier spam.</p>
 </div>
 
 </div>)

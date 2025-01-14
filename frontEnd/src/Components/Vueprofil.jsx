@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
+// import { Swiper, SwiperSlide } from 'swiper/react'
+// import { Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -193,7 +193,7 @@ export default function Vueprofil() {
                       </td>
                     </tr>
                     <tr>
-                      <td className="font-bold text-lg mb-1">Années d'expérience:</td>
+                      <td className="font-bold text-lg mb-1">Années d&rsquo;expérience:</td>
                       <td className="text-gray-700 text-xl ml-2 px-6">
                         {user?.annees_experience} ans
                       </td>

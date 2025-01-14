@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import img3 from "./image/img3.png"
+import  { useState } from 'react'
+// import img3 from "./image/img3.png"
 import KoulshiNet from "./image/Koulshinet.com (1).png"
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
