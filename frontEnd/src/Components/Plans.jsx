@@ -89,7 +89,7 @@ export default function Plans() {
   useEffect(() => {
     const fetchCurrentPrestataire = async () => {
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/current-prestataire', {id : user.id});
+        const response = await axios.post('https://back.koulchinet.com/api/current-prestataire', {id : user.id});
         setCurrentUser(response.data.prestataire);
         setHasProServices(response.data.has_pro_services);
         console.log(response.data);
@@ -118,7 +118,7 @@ export default function Plans() {
       console.log('User Data:', userData);
 
       // Check if user has PRO services
-      axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/prestataire/${userData.id}/check-pro`)
+      axios.get(`https://back.koulchinet.com//api/prestataire/${userData.id}/check-pro`)
         .then(response => {
           console.log('PRO Status Response:', response.data); // Add debugging
           setHasProServices(response.data.isPro);

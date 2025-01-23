@@ -22,7 +22,7 @@ export default function Contact() {
         formData.append('message',Message);
 
         if(formData){
-                axios.post('http://localhost:8000/api/contactMessage',formData)
+                axios.post('https://back.koulchinet.com/api/contactMessage',formData)
                 .then(response=>{
                     setManage(response.message);
                     console.log(response.message);

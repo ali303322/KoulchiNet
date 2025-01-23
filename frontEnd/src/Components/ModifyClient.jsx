@@ -14,7 +14,7 @@ export default function ModifyClient() {
 
   // Fetch client data by ID
   useEffect(() => {
-    axios.get(`http://127.0.0.1:8000/api/getclientbyid/${id}`)
+    axios.get(`https://back.koulchinet.com/api/getclientbyid/${id}`)
       .then(res => {
         setProfileData(res.data.client);
         setVille(res.data.client.ville); // Set Ville from profileData
@@ -25,7 +25,7 @@ export default function ModifyClient() {
 
   // Fetch available villes
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/villes")
+    axios.get("https://back.koulchinet.com/api/villes")
       .then(res => { setVilles(res.data); })
       .catch(err => console.log(err));
   }, []);
@@ -33,7 +33,7 @@ export default function ModifyClient() {
   // Fetch quartiers based on selected Ville
   useEffect(() => {
     if (Ville) {
-      axios.get(`http://127.0.0.1:8000/api/Districts/${Ville}`)
+      axios.get(`https://back.koulchinet.com/api/Districts/${Ville}`)
         .then(res => { setQuarties(res.data); })
         .catch(err => console.log(err));
     } else {
@@ -82,7 +82,7 @@ export default function ModifyClient() {
     updatedClientData.append('ville', Ville);
     updatedClientData.append('quartier', document.getElementById("quartie").value); // Ensure this is being set properly
     updatedClientData.append('photo_profel', photo);
-    axios.post(`http://127.0.0.1:8000/api/updateClient/${id}`, updatedClientData,
+    axios.post(`https://back.koulchinet.com/api/updateClient/${id}`, updatedClientData,
       {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -107,7 +107,7 @@ export default function ModifyClient() {
           {/* Profile Picture */}
 
           <div className="w-32 h-32 rounded-full overflow-hidden bg-pink-200 flex-shrink-0 mr-5">
-            <img  src={`http://127.0.0.1:8000/profile_photos_Client/${profileData.photo_profel}`}  alt="Profile" className="w-full h-full object-cover" />
+            <img  src={`https://back.koulchinet.com/profile_photos_Client/${profileData.photo_profel}`}  alt="Profile" className="w-full h-full object-cover" />
           </div>
           {/* Profile Info */}
           <div>

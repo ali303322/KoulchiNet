@@ -66,7 +66,7 @@ const fileInputRef = useRef(null);
         if (service) {
             let config = {
                 method: 'get',
-                url: 'http://localhost:8000/api/service-content/' + service,
+                url: 'https://back.koulchinet.com/api/service-content/' + service,
             };
 
             axios.request(config)
@@ -86,7 +86,7 @@ const fileInputRef = useRef(null);
         useEffect(() => {
             const fetchVilles = async () => {
                 try {
-                    const result = await axios.get('http://127.0.0.1:8000/api/villes');
+                    const result = await axios.get('https://back.koulchinet.com/api/villes');
                     setVilles(result.data);
                 } catch (error) {
                     console.log(error.response?.data || error.message);
@@ -103,7 +103,7 @@ const fileInputRef = useRef(null);
                 let config = {
                   method: 'get',
                   maxBodyLength: Infinity,
-                  url: `http://127.0.0.1:8000/api/Districts/${Ville}`,
+                  url: `https://back.koulchinet.com/api/Districts/${Ville}`,
                   headers: {},
                 };
 
@@ -124,7 +124,7 @@ const fileInputRef = useRef(null);
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/api/services',
+                url: 'https://back.koulchinet.com/api/services',
                 headers: { }
               };
 
@@ -145,7 +145,7 @@ const fileInputRef = useRef(null);
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://127.0.0.1:8000/api/services/'+service,
+            url: 'https://back.koulchinet.com/api/services/'+service,
             headers: { }
           };
 
@@ -288,7 +288,7 @@ useEffect(() => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://127.0.0.1:8000/api/prestataires',
+            url: 'https://back.koulchinet.com/api/prestataires',
             headers: { }
           };
 
@@ -355,7 +355,7 @@ useEffect(() => {
 
       console.log(
         dataContent?.serviceContent?.[0]?.imageHeader
-          ? `http://127.0.0.1:8000/${encodeURIComponent(dataContent.serviceContent[0].imageHeader)}`
+          ? `https://back.koulchinet.com/${encodeURIComponent(dataContent.serviceContent[0].imageHeader)}`
           : "/path/to/default-image.jpg"
       );
 
@@ -378,7 +378,7 @@ useEffect(() => {
     <section
   className="relative h-[434px] bg-cover bg-center"
   style={{
-    backgroundImage: `url('http://127.0.0.1:8000/${encodeURIComponent(
+    backgroundImage: `url('https://back.koulchinet.com/${encodeURIComponent(
       dataContent?.serviceContent?.[0]?.imageHeader || ""
     )}')`,
   }}
@@ -440,7 +440,7 @@ useEffect(() => {
               <img
                 src={
                     dataContent?.serviceContent?.[0]?.imageaventage
-                      ? `http://127.0.0.1:8000/${dataContent.serviceContent[0].imageHeader}`
+                      ? `https://back.koulchinet.com/${dataContent.serviceContent[0].imageHeader}`
                       : "." // Fallback if no imageHeader
                   }
                 alt="Plumber Service"
@@ -470,7 +470,7 @@ useEffect(() => {
                 <img
                     src={
                         dataContent?.serviceContent?.[0]?.imageTypeServices
-                        ? `http://127.0.0.1:8000/${dataContent.serviceContent[0].imageTypeServices}`
+                        ? `https://back.koulchinet.com/${dataContent.serviceContent[0].imageTypeServices}`
                         : "." // Fallback if no imageHeader
                         }
                     alt="Plumber Service"
@@ -538,7 +538,7 @@ useEffect(() => {
         <img
           src={
             dataContent?.serviceContent?.[0]?.imageHeader
-              ? `http://127.0.0.1:8000/${dataContent.serviceContent[0].imageHeader}`
+              ? `https://back.koulchinet.com/${dataContent.serviceContent[0].imageHeader}`
               : "." // Fallback if no imageHeader
           }
           alt="FAQ illustration"

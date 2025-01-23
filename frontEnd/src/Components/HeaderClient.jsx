@@ -46,7 +46,7 @@ export default function HeaderClient() {
               <img
                 src={KoulshiNet}
                 alt="Koulchinet.com"
-                className="h-[150px] w-auto  -top-12 left-0 object-contain
+                className="h-[70px] w-auto absolute left-0 object-contain
                 filter contrast-125 brightness-105
                 [image-rendering:crisp-edges]
                 [image-rendering:-webkit-optimize-contrast]"
@@ -102,7 +102,7 @@ export default function HeaderClient() {
               <div className="relative flex items-center space-x-3">
               {Client? (
                     <img
-                    src={`http://127.0.0.1:8000/profile_photos_Client/${Client.photo_profel}`}
+                    src={`https://back.koulchinet.com/profile_photos_Client/${Client.photo_profel}`}
                     alt="Profile"
                     className="w-16 h-16 rounded-full object-cover"
                     />

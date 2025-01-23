@@ -15,12 +15,11 @@ export default function Service() {
 
     const [categories , setCategories] = useState([]);
     const [services , setServices] = useState([]);
-
       useEffect(()=>{
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://localhost:8000/api/categories',
+            url: 'https://back.koulchinet.com/api/categories',
           };
 
           axios.request(config)
@@ -38,7 +37,7 @@ export default function Service() {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://localhost:8000/api/services',
+            url: 'https://back.koulchinet.com/api/services',
           };
 
           axios.request(config)
@@ -111,7 +110,7 @@ export default function Service() {
               >
                <i className={`text-blue-500 w-5 h-5 `}>
                <img
-                    src={`http://127.0.0.1:8000/${ser.icon}`}
+                    src={`https://back.koulchinet.com/${ser.icon}`}
                     alt="Icon"
                     className="w-5 h-5 object-cover"
                     />

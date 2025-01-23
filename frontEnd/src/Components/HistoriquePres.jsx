@@ -15,7 +15,7 @@ export default function HistoriquePres() {
     const [totalPages, setTotalPages] = useState(1);
 
     const getHistorys = async (page = 1) => {
-        await axios.get(`http://127.0.0.1:8000/api/historyprestataire/${user.id}?page=${page}`)
+        await axios.get(`https://back.koulchinet.com/api/historyprestataire/${user.id}?page=${page}`)
             .then(res => {
                 setHistorys(res.data.data); // Array of current page data
                 setCurrentPage(res.data.meta.current_page);

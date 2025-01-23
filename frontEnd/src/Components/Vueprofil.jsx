@@ -23,7 +23,7 @@ export default function Vueprofil() {
 
   const fetchUserData = useCallback(async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/prestataire/${id}`);
+      const response = await fetch(`https://back.koulchinet.com/api/prestataire/${id}`);
       const data = await response.json();
       console.log(data); // Vérifiez ici les données retournées
       setUser(data.user);
@@ -87,7 +87,7 @@ export default function Vueprofil() {
               {/* Left Side */}
               <div className="flex flex-col items-center w-[500px]">
                 <img
-                  src={`http://127.0.0.1:8000/profile_photos_perstataire/${user.documents[0]?.photo}`}
+                  src={`https://back.koulchinet.com/profile_photos_perstataire/${user.documents[0]?.photo}`}
                   alt={user?.nom || 'Profile'}
                   className="w-32 h-32 rounded-full mb-4"
                 />

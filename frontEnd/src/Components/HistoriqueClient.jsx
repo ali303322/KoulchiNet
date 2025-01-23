@@ -20,7 +20,7 @@ export default function HistoriqueClient() {
 
     const getHistorys = async () => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/historyclient/${user.id}?page=${currentPage}&per_page=${perPage}`);
+            const response = await axios.get(`https://back.koulchinet.com/api/historyclient/${user.id}?page=${currentPage}&per_page=${perPage}`);
             setHistorys(response.data.data);
             setTotalPages(response.data.totalPages);
         } catch (err) {

@@ -31,7 +31,7 @@ export default function Login() {
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login', {
+            const response = await axios.post('https://back.koulchinet.com/api/login', {
               email: email,
               password: password,
             });
@@ -108,7 +108,7 @@ export default function Login() {
             />
           </div>
         <ReCAPTCHA
-            sitekey="6LfwYpUqAAAAAA93-dRYjO5GuGBXspxx6mtEHY5N" // replace with your site key from Google
+            sitekey="6LcDFrsqAAAAAEW4toQSAg9BT1NR4UNI6aYLYNmA" // replace with your site key from Google
             onChange={handleCaptchaChange}
         />
           {/* Sign Up Button */}

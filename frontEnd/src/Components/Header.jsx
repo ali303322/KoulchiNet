@@ -39,9 +39,9 @@ export default function Header() {
                         <img
                             src={logo}
                             alt="Koulchinet.com"
-                            className="h-[200px] w-auto absolute -top-12 left-0 object-contain filter contrast-125 brightness-105
+                            className="h-[70px] w-auto absolute left-0 object-contain filter contrast-125 brightness-105
                             [image-rendering:crisp-edges]
-                            [image-rendering:-webkit-optimize-contrast]"
+                            [image-rendering:-webkit-optimize-contrast] w-10"
                         />
                     </Link>
 

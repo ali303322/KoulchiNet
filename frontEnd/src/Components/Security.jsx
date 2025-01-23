@@ -39,7 +39,7 @@ export default function Security() {
   const checkIfPrestataireExistsAndAproved = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/checkIfPrestataireExists",
+        "https://back.koulchinet.com/api/checkIfPrestataireExists",
         {},
         {
           headers: {
@@ -95,7 +95,7 @@ export default function Security() {
 
     axios
       .post(
-        `http://127.0.0.1:8000/api/prestataire/${prestataire.id}/change-password`,
+        `https://back.koulchinet.com/api/prestataire/${prestataire.id}/change-password`,
         {
           password_actuel: currentPassword,
           password_nouveau: newPassword,

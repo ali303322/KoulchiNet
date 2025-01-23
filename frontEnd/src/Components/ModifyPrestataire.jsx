@@ -25,7 +25,7 @@ export default function ModifyPrestataire() {
 const [documente,setDocument]=useState({});
   // Load existing data when the component mounts
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/getPrestataireById/"+id)
+    axios.get("https://back.koulchinet.com/api/getPrestataireById/"+id)
       .then(res => {
         setProfileData(res.data.prestataire);
         setDocument(res.data.prestataire.documents[0]);
@@ -38,7 +38,7 @@ const [documente,setDocument]=useState({});
   console.log(availability);
   // Fetch villes data
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/villes")
+    axios.get("https://back.koulchinet.com//api/villes")
       .then(res => { setVilles(res.data); })
       .catch(err => console.log(err));
   }, []);
@@ -46,7 +46,7 @@ const [documente,setDocument]=useState({});
   // Fetch quartiers based on selected Ville
   useEffect(() => {
     if (Ville) {
-      axios.get(`http://127.0.0.1:8000/api/Districts/${Ville}`)
+      axios.get(`https://back.koulchinet.com/api/Districts/${Ville}`)
         .then(res => { setQuarties(res.data); })
         .catch(err => console.log(err));
     }
@@ -54,7 +54,7 @@ const [documente,setDocument]=useState({});
 
   // Fetch services offered
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/services")
+    axios.get("https://back.koulchinet.com/api/services")
       .then(res => { setServicesPropes(res.data); })
       .catch(err => console.log(err));
   }, []);
@@ -189,7 +189,7 @@ const [documente,setDocument]=useState({});
     }
 
 
-    axios.post(`http://127.0.0.1:8000/api/updatePrestataire/${id}`, formData,
+    axios.post(`https://back.koulchinet.com/api/updatePrestataire/${id}`, formData,
       {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -214,7 +214,7 @@ const [documente,setDocument]=useState({});
         <div className="flex items-center mb-8">
 
           <div className="w-32 h-32 rounded-full overflow-hidden bg-pink-200 flex-shrink-0 mr-5">
-            <img  src={`http://127.0.0.1:8000/profile_photos_perstataire/${documente && documente.photo}`}alt="Profile" className="w-full h-full object-cover" />
+            <img  src={`https://back.koulchinet.com/profile_photos_perstataire/${documente && documente.photo}`}alt="Profile" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-[#333] text-2xl font-bold m-0">{profileData.nom} {profileData.prenom}</h1>

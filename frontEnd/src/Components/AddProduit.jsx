@@ -23,7 +23,7 @@ export default function AddProduit() {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/api/services',
+                url: 'https://back.koulchinet.com/api/services',
                 headers: { }
               };
 
@@ -68,7 +68,7 @@ export default function AddProduit() {
     }
 
     try {
-      await axios.post('http://127.0.0.1:8000/api/products', formDataToSend, {
+      await axios.post('https://back.koulchinet.com/api/products', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

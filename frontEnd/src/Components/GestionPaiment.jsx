@@ -14,7 +14,7 @@ export default function GestionPaiment() {
     useEffect(() => {
         const fetchDemandes = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/getAllDemandes?page=${currentPage}&per_page=${perPage}`);
+                const response = await axios.get(`https://back.koulchinet.com/api/getAllDemandes?page=${currentPage}&per_page=${perPage}`);
                 console.log('Fetched demandes:', response.data); // Debugging
                 setPrestataire(response.data.data); // Set the data
                 setTotalPages(response.data.totalPages); // Set total pages
@@ -37,7 +37,7 @@ export default function GestionPaiment() {
     const deletePrestataire=(id)=>{
         const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce prestataire ?");
         if (isConfirmed) {
-         axios.delete("http://127.0.0.1:8000/api/deletePaimentDemande/"+id)
+         axios.delete("https://back.koulchinet.com/api/deletePaimentDemande/"+id)
          .then(res=>{
             alert(res.data.message)
             window.location.reload();

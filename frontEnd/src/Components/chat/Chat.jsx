@@ -20,7 +20,7 @@ export default function Chat() {
   const fetchMessages = async (role, userId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/messages/${role}/${userId}`
+        `https://back.koulchinet.com/api/messages/${role}/${userId}`
       );
       console.log("Messages fetched:", response.data);
 

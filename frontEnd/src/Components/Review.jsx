@@ -14,7 +14,7 @@ export default function Review() {
 
     const getpres = async (idpres) => {
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/prestataire/${idpres}`);
+            const response = await axios.get(`https://back.koulchinet.com/api/prestataire/${idpres}`);
             setPres(response.data);
         } catch (error) {
             console.error(error);
@@ -41,7 +41,7 @@ export default function Review() {
                 commentaire: commentaire,
                 prestataire_id: id,
             };
-            const response = await axios.post(`http://127.0.0.1:8000/api/review`, payload);
+            const response = await axios.post(`https://back.koulchinet.com/api/review`, payload);
 
             if (response.status === 201 || response.status === 200) {
                 setSuccessMessage("Votre avis a été enregistré avec succès !");
@@ -71,7 +71,7 @@ export default function Review() {
                             )}
                                 {pres && pres.docs ? (
                                     <img
-                                        src={`http://127.0.0.1:8000/profile_photos_perstataire/${pres.docs[0].photo}`}
+                                        src={`https://back.koulchinet.com/profile_photos_perstataire/${pres.docs[0].photo}`}
                                         alt="Profile"
                                         className="w-32 h-32 rounded-full object-cover mb-3"
                                     />

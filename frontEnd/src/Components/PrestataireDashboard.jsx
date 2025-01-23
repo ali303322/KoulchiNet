@@ -23,7 +23,7 @@ export default function PrestataireDashboard() {
      const checkIfPrestataireExistsAndAproved=async()=>{
          try {
              const response = await axios.post(
-               'http://127.0.0.1:8000/api/checkIfPrestataireExists',
+               'https://back.koulchinet.com/api/checkIfPrestataireExists',
                {},
                {
                  headers: {
@@ -44,7 +44,7 @@ export default function PrestataireDashboard() {
            }catch (error) {
               console.error('Error:', error);
 
-            //   window.location="http://localhost:3000/login"
+            //   window.location="https://localhost:3000/login"
            }
 
      };
@@ -106,7 +106,7 @@ export default function PrestataireDashboard() {
               {/* Profile Image */}
               <div className="w-[440px] h-[332px] pb-32">
                 <img
-                  src={`http://127.0.0.1:8000/profile_photos_perstataire/${doc && doc[0].photo}`}
+                  src={`https://back.koulchinet.com/profile_photos_perstataire/${doc && doc[0].photo}`}
                   alt="Profile"
                   className="w-80 h-80 rounded-full object-cover"
                 />

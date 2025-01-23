@@ -14,7 +14,7 @@ export default function DemandeDetails() {
   const [dispo,setDispo]=useState([]);
   const { id } = location.state || {}
   useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/api/getPrestataireById/"+id)
+    axios.get("https://back.koulchinet.com/api/getPrestataireById/"+id)
     .then(res=>{
       setPrestataire(res.data.prestataire)
       setDocument(res.data.prestataire.documents[0])
@@ -26,7 +26,7 @@ export default function DemandeDetails() {
   const approvePrestataire = () => {
     const isConfirmed = window.confirm("Êtes-vous sûr de vouloir approuver ce prestataire ?");
     if (isConfirmed) {
-      axios.post(`http://127.0.0.1:8000/api/activePrestataire/${id}`)
+      axios.post(`https://back.koulchinet.com/api/activePrestataire/${id}`)
       .then(res=>{
 
         alert(res.data.message)
@@ -47,7 +47,7 @@ export default function DemandeDetails() {
   const deletePrestataire=()=>{
     const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce prestataire ?");
     if (isConfirmed) {
-     axios.delete("http://127.0.0.1:8000/api/deleteprestataire/"+id)
+     axios.delete("https://back.koulchinet.com/api/deleteprestataire/"+id)
      .then(res=>alert(res.data.message))
      .catch(err=>console.log(err))
     // window.location.reload();
@@ -67,7 +67,7 @@ export default function DemandeDetails() {
         {/* Profile Image */}
         <div className="w-32 h-32 rounded-full overflow-hidden bg-pink-200 flex-shrink-0">
           <img
-            src={`http://127.0.0.1:8000/profile_photos_perstataire/${document && document.photo}`}
+            src={`https://back.koulchinet.com/profile_photos_perstataire/${document && document.photo}`}
             alt="Profile"
             className="w-full h-full object-cover"
           />
@@ -157,7 +157,7 @@ export default function DemandeDetails() {
           diplomes.map((src, index) => (
             <div key={index}>
               <iframe
-                src={`http://127.0.0.1:8000/diplomes/${src}`}
+                src={`https://back.koulchinet.com/diplomes/${src}`}
                 title="PDF Viewer"
                 width={421}
                 height={400}

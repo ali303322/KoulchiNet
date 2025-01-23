@@ -16,7 +16,7 @@ export default function PresHistoryDetails() {
 
   const getHistorys = async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/history/${id}`);
+      const res = await axios.get(`https://back.koulchinet.com/api/history/${id}`);
       setData(res.data);
     } catch (err) {
       console.error(err);
@@ -61,7 +61,7 @@ export default function PresHistoryDetails() {
                   data.images.map((image, index) => (
                     <img
                       key={index}
-                      src={`http://127.0.0.1:8000/${image}`}
+                      src={`https://back.koulchinet.com/${image}`}
                       alt={`Image ${index + 1}`}
                       className="w-32 h-32 object-cover rounded-lg shadow-md"
                     />

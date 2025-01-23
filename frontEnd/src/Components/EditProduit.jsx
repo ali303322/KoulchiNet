@@ -22,7 +22,7 @@ export default function EditProduit() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://127.0.0.1:8000/api/products/${id}`);
+        const response = await axios.get(`https://back.koulchinet.com/api/products/${id}`);
         const product = response.data;
         setFormData({
           name: product.name,
@@ -74,7 +74,7 @@ export default function EditProduit() {
     formDataToSend.append('_method', 'PUT');
 
     try {
-        const response = await axios.post(`http://127.0.0.1:8000/api/products/${id}`, formDataToSend, {
+        const response = await axios.post(`https://back.koulchinet.com/api/products/${id}`, formDataToSend, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'X-HTTP-Method-Override': 'PUT'
@@ -82,7 +82,7 @@ export default function EditProduit() {
         });
 
         console.log('Update response:', response.data); // Debug log
-        
+
         if (response.data.message === 'Product updated successfully') {
             setSuccess('Product updated successfully');
             setTimeout(() => {
@@ -153,9 +153,9 @@ export default function EditProduit() {
                 <div className="flex justify-between space-x-4">
                   {/* Upload Media */}
                   <div className="relative w-44">
-                    <input 
-                      type="file" 
-                      className="hidden" 
+                    <input
+                      type="file"
+                      className="hidden"
                       id="editProductImage"
                       onChange={handleImageChange}
                       accept="image/*"
@@ -183,7 +183,7 @@ export default function EditProduit() {
                   />
 
                   {/* Product Category */}
-                  <select 
+                  <select
                     name="category"
                     value={formData.category}
                     onChange={handleInputChange}

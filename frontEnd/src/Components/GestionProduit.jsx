@@ -22,7 +22,7 @@ export default function GestionProduit() {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://127.0.0.1:8000/api/products?page=${currentPage}&per_page=${perPage}`);
+                const response = await axios.get(`https://back.koulchinet.com/api/products?page=${currentPage}&per_page=${perPage}`);
                 console.log('Fetched products:', response.data); // Add this for debugging
                 setProducts(response.data.data);
                 setTotalPages(response.data.totalPages); // Set the total pages
@@ -41,7 +41,7 @@ export default function GestionProduit() {
         e.stopPropagation();
         if (window.confirm('Are you sure you want to delete this product?')) {
             try {
-                await axios.delete(`http://127.0.0.1:8000/api/products/${id}`);
+                await axios.delete(`https://back.koulchinet.com/api/products/${id}`);
                 setProducts(products.filter(product => product.id !== id));
             } catch (err) {
                 console.error('Error deleting product:', err);
@@ -191,7 +191,7 @@ export default function GestionProduit() {
                 <div className="w-1/2 h-64 rounded-lg overflow-hidden">
                   <img
                     src={selectedProduct.image
-                      ? `http://127.0.0.1:8000/storage/${selectedProduct.image}`
+                      ? `https://back.koulchinet.com/storage/${selectedProduct.image}`
                       : "image/img2.jpeg"}
                     alt={selectedProduct.name}
                     className="w-full h-full object-cover rounded-lg"

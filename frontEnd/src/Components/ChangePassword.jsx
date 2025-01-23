@@ -51,7 +51,7 @@ const ChangePassword = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://127.0.0.1:8000/api/reset-password", {
+            const response = await axios.post("https://back.koulchinet.com/api/reset-password", {
                 token,
                 password,
                 password_confirmation: passwordConfirmation,

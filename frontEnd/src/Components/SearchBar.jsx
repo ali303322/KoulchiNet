@@ -18,7 +18,7 @@ export default function SearchBar() {
       useEffect(() => {
         const fetchVilles = async () => {
             try {
-                const result = await axios.get('http://127.0.0.1:8000/api/villes');
+                const result = await axios.get('https://back.koulchinet.com/api/villes');
                 if(result){
                     let sortedIVilles = [];
                     result.data.forEach(element => {
@@ -31,7 +31,6 @@ export default function SearchBar() {
                 console.log(error.response?.data || error.message);
             }
         };
-
         fetchVilles();
     }, []);
 
@@ -43,7 +42,7 @@ export default function SearchBar() {
             let config = {
               method: 'get',
               maxBodyLength: Infinity,
-              url: `http://127.0.0.1:8000/api/Districts/${city}`,
+              url: `https://back.koulchinet.com/api/Districts/${city}`,
               headers: {},
             };
 
@@ -72,7 +71,7 @@ export default function SearchBar() {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://127.0.0.1:8000/api/services',
+            url: 'https://back.koulchinet.com/api/services',
             headers: { }
           };
 
@@ -90,7 +89,7 @@ export default function SearchBar() {
             let config = {
                 method: 'get',
                 maxBodyLength: Infinity,
-                url: 'http://127.0.0.1:8000/api/prestataires',
+                url: 'https://back.koulchinet.com/api/prestataires',
                 headers: { }
               };
 
@@ -116,7 +115,7 @@ export default function SearchBar() {
 
             try {
                 // Make the API call to get the service name
-                const response = await axios.get(`http://127.0.0.1:8000/api/getserviceName/${service}`);
+                const response = await axios.get(`https://back.koulchinet.com/api/getserviceName/${service}`);
 
                 // Log the entire response to see its structure
                 console.log('API Response:', response);

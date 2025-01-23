@@ -13,23 +13,23 @@ export default function ClientDetails() {
   const deleteClient=()=>{
     const isConfirmed = window.confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
     if (isConfirmed) {
-        axios.delete("http://127.0.0.1:8000/api/deleteclient/"+id)
+        axios.delete("https://back.koulchinet.com/api/deleteclient/"+id)
         .then(res=>{
-          
+
           alert(res.data.message)
           window.location.reload();
         })
         .catch(err=>console.log(err))
-        
+
     }
   }
- 
+
   useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/api/getclientbyid/"+id)
+    axios.get("https://back.koulchinet.com/api/getclientbyid/"+id)
     .then(res=>setClient(res.data.client))
     .catch(err=>console.log(err))
   },[])
- 
+
   return (
     <div className="bg-gray-100 flex min-h-screen">
     <SIdeBar/>
@@ -43,7 +43,7 @@ export default function ClientDetails() {
           <div className="flex items-start space-x-8">
             {/* Profile Image */}
             <div className="w-48 h-48 rounded-full overflow-hidden bg-blue-200 flex-shrink-0">
-              <img src={`http://127.0.0.1:8000/profile_photos_Client/${cleint.photo_profel}`}  alt="Profile" className="w-full h-full object-cover" />
+              <img src={`https://back.koulchinet.com/profile_photos_Client/${cleint.photo_profel}`}  alt="Profile" className="w-full h-full object-cover" />
             </div>
 
             {/* User Details */}

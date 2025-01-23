@@ -18,7 +18,7 @@ export default function ClientDashboard() {
         }
         try {
             const response = await axios.post(
-              'http://127.0.0.1:8000/api/checkIfClientExists',
+              'https://back.koulchinet.com/api/checkIfClientExists',
               {},
               {
                 headers: {
@@ -30,12 +30,12 @@ export default function ClientDashboard() {
              if (response.data.client) {
                  setClient(response.data.client)
              }else{
-                window.location="http://localhost:3000/login"
+                window.location="https://koulchinet.com/login"
                 return
              }
           }catch (error) {
              console.error('Error:', error);
-             window.location="http://localhost:3000/login"
+             window.location="https://koulchinet.com/login"
              return
 
           }
@@ -92,7 +92,7 @@ export default function ClientDashboard() {
           {/* Profile Image */}
           <div>
             <img
-              src={`http://127.0.0.1:8000/profile_photos_Client/${client.photo_profel}`}
+              src={`https://back.koulchinet.com/profile_photos_Client/${client.photo_profel}`}
               alt={t("profileImage")}
               className="w-64 h-64 rounded-full object-cover"
             />

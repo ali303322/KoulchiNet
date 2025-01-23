@@ -70,19 +70,19 @@ export default function InscriptionPrestataire() {
 
    const [servicesProposes,setServicesPropes]=useState([]);
   useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/api/villes")
+    axios.get("https://back.koulchinet.com/api/villes")
     .then(res=>{setVilles(res.data)})
     .catch(err=>console.log(err))
   },[])
 
   useEffect(()=>{
-    axios.get("http://127.0.0.1:8000/api/services")
+    axios.get("https://back.koulchinet.com/api/services")
     .then(res=>{setServicesPropes(res.data)})
     .catch(err=>console.log(err))
   },[])
 
   useEffect(()=>{
-    axios.get(`http://127.0.0.1:8000/api/Districts/${Ville}`)
+    axios.get(`https://back.koulchinet.com/api/Districts/${Ville}`)
     .then(res=>{setQuarties(res.data)})
     .catch(err=>console.log(err))
   },[Ville])
@@ -281,7 +281,7 @@ export default function InscriptionPrestataire() {
 
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/register_prestataire', formData, {
+      const response = await axios.post('https://back.koulchinet.com/api/register_prestataire', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json',
@@ -684,7 +684,7 @@ export default function InscriptionPrestataire() {
           </div>
 
            <ReCAPTCHA
-        sitekey="6LfwYpUqAAAAAA93-dRYjO5GuGBXspxx6mtEHY5N" // replace with your site key from Google
+        sitekey="6LcDFrsqAAAAAEW4toQSAg9BT1NR4UNI6aYLYNmA" // replace with your site key from Google
         onChange={handleCaptchaChange}
       />
 

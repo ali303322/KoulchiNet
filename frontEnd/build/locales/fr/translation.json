@@ -1,0 +1,317 @@
+{
+    "about": "A propos",
+    "home": "Accueil",
+    "services": "Nos services",
+    "provider": "Devenir prestataire",
+    "marketplace": "Marketplace",
+    "login": "Se connecter",
+    "signup": "S’inscrire",
+    "homeContent": {
+        "title": "Bienvenue sur koulchinet",
+        "slogan" : "Simplifiez vous la vie: Tous vos services en un click",
+        "description": " votre partenaire de confiance pour tous vos besoins en services domestiques et professionnels. \n Fondée en 2024, notre plateforme a pour mission de simplifier la vie quotidienne des familles et des particuliers en les mettant en relation avec des prestataires de services qualifiés et fiables.",
+        "button": "En savoir plus",
+        "nosCatDeService" : "Nos Catégories de Services",
+        "ServicesDomestiques" : "Services Domestiques",
+        "ServicesDomestiquesContent" : " Ménage, jardinage, électricité, plomberie, menuiserie, peinture, contrôle des nuisibles, réparation électroménager,assemblage meubles, installation TV, miroiterie, déménagement, énergie solaire, tapisserie, serrurier, mécanique auto..."
+      },
+
+    "servicesCont": {
+      "accompagnement": {
+        "title": "Services d'Accompagnement",
+        "description": "Garde d'enfants, garde d'animaux, toilettage, aide aux personnes âgées, kinésithérapie, soins à domicile, cours à domicile, cours de musique..."
+      },
+      "bienetre": {
+        "title": "Bien-être & Soins",
+        "description": "Coaching sportif, coaching mental, diététique et nutrition, thérapie par massage, kinésithérapie, coiffeur à domicile..."
+      },
+      "renovation": {
+        "title": "Rénovation",
+        "description": "Maçonnerie, rénovations cuisines et salles de bains, carrelage, parquet, installation fenêtres, plâtre, climatisation, marbre, inox, étanchéité..."
+      },
+      "informatique": {
+        "title": "Informatique",
+        "description": "Assistance informatique, design des sites web, copywriting et SEO, e-Commerce..."
+      },
+      "evenements": {
+        "title": "Événements",
+        "description": "Hôtesses, serveurs, chef à domicile, traiteurs, orchestres, DJ, negafa et cérémonies de mariage, photographes et cameraman..."
+      },
+      "professionnels": {
+        "title": "Services Professionnels",
+        "description": "Traduction, interprétation, développement web et mobile, graphisme, rédaction de contenu, gestion des réseaux sociaux, conseils juridiques..."
+      }
+    },
+
+
+        "howItWorks": "Comment ça marche ?",
+        "steps": {
+          "step1": "Inscription : Créez un compte sur koulchinet.com en tant que client ou prestataire",
+          "step2": "Publication : Les clients décrivent leurs besoins en détail en joignant des fichiers audio et vidéo",
+          "step3": "Propositions : Les prestataires locaux qualifiés soumettent leurs offres",
+          "step4": "Sélection : Les clients choisissent le prestataire qui leur convient le mieux",
+          "step5": "Réalisation : Le service est effectué par le prestataire sélectionné",
+          "step6": "Évaluation : Les clients évaluent leur expérience pour aider la communauté"
+        },
+
+            "mission": {
+              "title": "Notre mission",
+              "content": "Koulchinet.com est votre plateforme complète pour tous les services de proximité, qu'ils soient domestiques ou professionnels. Notre mission est de simplifier votre quotidien et de rendre l'organisation de vos tâches plus facile en vous offrant un accès à des professionnels de confiance pour vos besoins. Que vous soyez un particulier à la recherche de services de qualité ou un professionnel souhaitant développer votre activité, Koulchinet.com est la solution qu'il vous faut. Nous mettons en relation des milliers de clients avec des prestataires qualifiés chaque jour, créant ainsi une communauté de confiance et d'entraide."
+            },
+
+            "faq": {
+                "title": "Questions fréquemment posées (FAQs)",
+                "questions": [
+                  {
+                    "question": "Les prestataires sont-ils vérifiés ?",
+                    "answer": "Oui, tous nos prestataires passent par un processus de vérification rigoureux. Nous vérifions leur identité, leurs qualifications, et leurs antécédents pour assurer la sécurité et la qualité de service à nos clients."
+                  },
+                  {
+                    "question": "Quels types de services sont disponibles sur la plateforme ?",
+                    "answer": "Nous proposons une large gamme de services allant de la plomberie à l'organisation d'événements, en passant par les services de nettoyage, de santé et de bien-être."
+                  },
+                  {
+                    "question": "La plateforme garantit-elle la satisfaction ?",
+                    "answer": "Bien que nous effectuions une vérification minutieuse des prestataires, nous recommandons aux clients de bien discuter de leurs besoins et attentes avant de confirmer un service."
+                  },
+                  {
+                    "question": "Comment puis-je laisser un avis sur un prestataire ?",
+                    "answer": "Après avoir utilisé les services d’un prestataire, vous pourrez laisser un avis sur son profil. Cela aidera les autres clients à faire leur choix."
+                  }
+                ]
+              },
+
+
+              "aboutTitle": "A propos sur koulchinet",
+              "aboutContent": "La plateforme qui connecte les experts de votre quartier avec vos projets",
+              "aboutKoulchinet": "A propos de koulchinet",
+              "koulchinetDescription": "Koulchinet est née de la vision passionnée par l'innovation et l'amélioration de la qualité de vie. Confronté moi-même aux défis de la gestion du quotidien, j'ai décidé de créer une solution qui rendrait l'accès aux services domestiques plus simple, plus rapide et plus fiable.",
+              "missionTitle": "Notre mission",
+              "missionDescription": "Notre plateforme est née dune vision simple mais puissante : faciliter la mise en relation entre les particuliers et les professionnels de services locaux qualifiés. Nous croyons en la force de la communauté locale et en l'importance de services de qualité accessibles à tous.",
+              "whyChooseUs": "Pourquoi Nous Choisir ?",
+              "qualityCertified": "Qualité Certifiée",
+              "qualityDescription": "Nos prestataires sont rigoureusement sélectionnés et évalués par notre communauté.",
+              "proximity": "Proximité",
+              "proximityDescription": "Des prestataires locaux près de chez vous pour une intervention rapide et efficace.",
+              "transparency": "Transparence",
+              "transparencyDescription": "Avis vérifiés et notation détaillée pour chaque prestataire.",
+              "professionalism": "Professionnalisme",
+              "professionalismDescription": "Des prestataires expérimentés et qualifiés dans leur domaine.",
+              "commitment": "Notre engagement",
+              "commitmentDescription": "Nous nous engageons à:",
+              "commitmentPoints": {
+                "identityVerification": "Vérifier rigoureusement l'identité et les qualifications de chaque prestataire",
+                "qualityMonitoring": "Assurer un suivi qualité continu de nos prestataires",
+                "fastConnection": "Garantir une mise en relation rapide et efficace",
+                "dataProtection": "Protéger vos données personnelles",
+                "customerSupport": "Proposer un support client réactif 7j/7"
+
+              },
+
+              "contactTitle": "Contactez-nous",
+              "contactEmail": "Email",
+              "contactPhone": "Téléphone",
+              "contactAddress": "Adresse",
+              "contactSocialLinks": "Contactez-nous via :",
+              "contactSubmitButton": "Envoyer",
+              "namePlaceholder": "Votre nom complet",
+              "emailPlaceholder": "Votre email",
+              "subjectPlaceholder": "Sujet",
+              "messagePlaceholder": "Votre message",
+              "facebook": "Facebook",
+              "instagram": "Instagram",
+              "linkedin": "LinkedIn",
+              "address": "123 rue Bahr Kazwine N 8 Harhoura, Temara, Maroc",
+              "phone": "06.63.99.44.09",
+              "email": "contact@koulshinet.com",
+
+
+                "findService": "Trouvez votre Service",
+                "chooseCity": "Choisir votre ville",
+                "chooseDistrict": "Choisir votre Arrondissement",
+                "chooseService": "Choisir votre service",
+                "search": "Rechercher",
+
+                "becomeProvider": "Devenez prestataire sur Koulchinet",
+                "joinCommunity": "Rejoignez notre communauté d’experts et développez votre activité",
+                "getStarted": "Commencer maintenant",
+
+
+                    "whyJoinUs": "Pourquoi nous rejoindre ?",
+                    "developActivity": "Développez votre activité",
+                    "developActivityDesc": "Accédez à une clientèle qualifiée et augmentez vos revenus",
+                    "flexibility": "Flexibilité totale",
+                    "flexibilityDesc": "Gérez votre emploi du temps en toute liberté",
+                    "dedicatedSupport": "Support dédié",
+                    "dedicatedSupportDesc": "Bénéficiez d’un accompagnement personnalisé pour réussir",
+                    "howItWorksProvider": "Comment ça marche ?",
+                    "step1": "Inscrivez-vous gratuitement",
+                    "step1Desc": "Créez votre profil professionnel en quelques minutes et présentez vos services",
+                    "step2": "Complétez votre profil",
+                    "step2Desc": "Ajoutez vos compétences, tarifs et disponibilités pour vous démarquer",
+                    "step3": "Recevez des demandes",
+                    "step3Desc": "Soyez notifié des nouvelles opportunités dans votre zone",
+                    "step4": "Développez votre activité",
+                    "step4Desc": "Fidélisez vos clients et augmentez votre visibilité grâce aux avis",
+
+"servicesDy": {
+    "Maçonnerie": "Maçonnerie",
+    "Rénovations cuisines": "Rénovations cuisines",
+    "Rénovations salles de Bain": "Rénovations salles de bain",
+    "Peinture intérieure": "Peinture intérieure",
+    "Peinture Intérieure et extérieure": "Peinture intérieure et extérieure",
+    "Étanchéité": "Étanchéité",
+    "Menuiserie Bois": "Menuiserie bois",
+    "Menuiserie Aluminium": "Menuiserie aluminium",
+    "Climatisation et froid": "Climatisation et froid",
+    "Energie solaire": "Énergie solaire",
+    "Plâtre": "Plâtre",
+    "Bois": "Bois",
+    "Plaques suspendues": "Plaques suspendues",
+    "Carrelage": "Carrelage",
+    "Parquet": "Parquet",
+    "Hôtesses": "Hôtesses",
+    "Marbre": "Marbre",
+    "Résines de sol": "Résines de sol",
+    "Déménagement": "Déménagement",
+    "Chef à domicile": "Chef à domicile",
+    "Traiteurs": "Traiteurs",
+    "Orchestres": "Orchestres",
+    "Negafa et cérémonies de mariage": "Negafa et cérémonies de mariage",
+    "Cérémonies de mariage": "Cérémonies de mariage",
+    "Photographes et cameraman": "Photographes et cameraman",
+    "Cameraman": "Cameraman",
+    "Ménage": "Ménage",
+    "Jardinage": "Jardinage",
+    "Electricité": "Électricité",
+    "Plomberie": "Plomberie",
+    "Serveurs": "Serveurs",
+    "Coiffeur à domicile": "Coiffeur à domicile",
+    "Contrôle des nuisibles": "Contrôle des nuisibles",
+    "Réparation appareil électroménager": "Réparation appareil électroménager",
+    "Installation TV et accessoires électroniques": "Installation TV et accessoires électroniques",
+    "Accessoires électroniques": "Accessoires électroniques",
+    "Serrurier": "Serrurier",
+    "Garage Auto": "Garage auto",
+    "Services Informatiques": "Services informatiques",
+    "Peinture et décoration": "Peinture et décoration",
+    "Tapisserie": "Tapisserie",
+    "Miroiterie": "Miroiterie",
+    "Assemblage des meubles": "Assemblage des meubles",
+    "Garde d’enfants": "Garde d’enfants",
+    "Garde d’animaux": "Garde d’animaux",
+    "Toilettage d’animaux": "Toilettage d’animaux",
+    "Aide aux personnes âgées": "Aide aux personnes âgées",
+    "Kinésithérapie": "Kinésithérapie",
+    "Soins à domicile": "Soins à domicile",
+    "Cours à domicile": "Cours à domicile",
+    "Cours de musique": "Cours de musique",
+    "Coaching sportif": "Coaching sportif",
+    "Coaching mental": "Coaching mental",
+    "Diététique et nutrition": "Diététique et nutrition",
+    "Thérapie par massage": "Thérapie par massage",
+    "Mecanique auto": "Mecanique Auto"
+  },
+
+  "servicesTitle": "nos services",
+  "servicesDescription": "une large gammede services professionnels a votre disposition",
+
+
+
+  "hero": {
+    "title": "La Marketplace des Services de Proximité",
+    "description": "Trouvez les meilleurs équipements pour exercer ou faire appel à des services professionnels de qualité"
+  },
+  "searchMarket": {
+    "placeholder": "Rechercher un produit...",
+    "categories": "Toutes les catégories",
+    "button": "Rechercher"
+  },
+  "categories": {
+    "title": "Catégories"
+  },
+  "loading": "Chargement...",
+  "error": "Une erreur s'est produite!",
+  "product": {
+    "buy": "Acheter"
+  },
+
+
+
+  "clientDash" : {
+    "profile": "Profil",
+    "messages": "Messages",
+    "security": "Sécurité",
+    "history": "Historique",
+    "logout": "Se déconnecter",
+        "accountStatus": "Statut du compte",
+        "confirmed": "Confirmé",
+        "generalInfo": "Informations générales",
+        "modify": "Modifier",
+        "profileImage": "Image de profil",
+        "name": "Nom",
+        "firstName": "Prénom",
+        "email": "Email",
+        "phone": "Téléphone",
+        "city": "Ville",
+        "district": "Quartier",
+
+        "changePassword": "Modifier le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "enterCurrentPassword": "Saisissez votre mot de passe actuel",
+        "enterNewPassword": "Saisissez votre nouveau mot de passe",
+        "retypeNewPassword": "Retapez le nouveau mot de passe",
+        "veryWeak": "Très faible",
+        "weak": "Faible",
+        "medium": "Moyen",
+        "strong": "Fort",
+        "save": "Sauvegarder",
+        "searchPlaceholder": "Rechercher...",
+        "date": "Date",
+        "service": "Service",
+        "serviceType": "Type de service",
+        "action": "Action",
+        "review": "Review",
+        "previous": "Précédent",
+        "next": "Suivant"
+  },
+
+
+  "presDash": {
+    "profile": "Profil",
+    "messages": "Messages",
+    "security": "Sécurité",
+    "plans": "Plans",
+    "history": "Historique",
+    "logout": "Se déconnecter",
+
+    "passwordChange": {
+        "changePassword": "Modifier le mot de passe",
+        "currentPassword": "Mot de passe actuel",
+        "enterCurrentPassword": "Saisissez votre mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "enterNewPassword": "Saisissez votre nouveau mot de passe",
+        "confirmNewPassword": "Confirmer le nouveau mot de passe",
+        "retypeNewPassword": "Retapez le nouveau mot de passe",
+        "passwordStrength": {
+        "veryWeak": "Très faible",
+        "weak": "Faible",
+        "medium": "Moyen",
+        "strong": "Fort"
+    },
+    "save": "Sauvegarder",
+    "error": "Erreur",
+    "success": "Succès"
+    }
+
+  }
+
+
+
+
+
+
+
+  }

@@ -28,7 +28,7 @@ useEffect(()=>{
             'service_id': dataComes[0].service
         };
 
-        axios.post('http://127.0.0.1:8000/api/prestataire', data)
+        axios.post('https://back.koulchinet.com/api/prestataire', data)
             .then((response) => {
                 // Traitement des données des prestataires reçues
                 setPrestataire(response.data);
@@ -51,7 +51,7 @@ useEffect(()=>{
             'service_id': dataComes[0].service
         };
 
-        axios.post('http://127.0.0.1:8000/api/prestataireByCity', data)
+        axios.post('https://back.koulchinet.com/api/prestataireByCity', data)
             .then((response) => {
                 // Traitement des données des prestataires reçues
                 setPrestataireByCity(response.data);
@@ -74,7 +74,7 @@ useEffect(()=>{
             'service_id': dataComes[0].service
         };
 
-        axios.post('http://127.0.0.1:8000/api/prestataireByRegion', data)
+        axios.post('https://back.koulchinet.com/api/prestataireByRegion', data)
             .then((response) => {
                 // Traitement des données des prestataires reçues
                 setPrestataireByRegion(response.data);
@@ -110,7 +110,7 @@ console.log(prestataireByCity);
                 className="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center justify-between h-[381px] w-[285px]"
             >
                 <img
-                    src={`http://127.0.0.1:8000/profile_photos_perstataire/${pres.documents[0].photo}`}
+                    src={`https://back.koulchinet.com/profile_photos_perstataire/${pres.documents[0].photo}`}
                     alt={pres.nom}
                     className="w-32 h-32 rounded-full mb-6"
                 />
@@ -141,7 +141,7 @@ console.log(prestataireByCity);
                     className="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center justify-between "
                 >
                     <img
-                        src={`http://127.0.0.1:8000/profile_photos_perstataire/${pres.documents[0].photo}`}
+                        src={`https://back.koulchinet.com/profile_photos_perstataire/${pres.documents[0].photo}`}
                         alt={pres.nom}
                         className="w-32 h-32 rounded-full mb-6"
                     />
@@ -176,7 +176,7 @@ console.log(prestataireByCity);
                     className="bg-white p-8 rounded-2xl shadow-sm flex flex-col items-center justify-between "
                 >
                     <img
-                        src={`http://127.0.0.1:8000/profile_photos_perstataire/${pres.documents[0].photo}`}
+                        src={`https://back.koulchinet.com/profile_photos_perstataire/${pres.documents[0].photo}`}
                         alt={pres.nom}
                         className="w-32 h-32 rounded-full mb-6"
                     />

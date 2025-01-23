@@ -16,7 +16,7 @@ export default function Transaction() {
 
     const getHistorys=async(page)=>
     {
-      await axios.get(`http://127.0.0.1:8000/api/transaction?page=${page}`)
+      await axios.get(`https://back.koulchinet.com/api/transaction?page=${page}`)
       .then(res=>{
         setTransaction(res.data.transactions)
         setTotalPages(res.data.totalPages); // Ensure your API returns total pages
@@ -32,7 +32,7 @@ export default function Transaction() {
             let config = {
                 method: 'delete',
                 maxBodyLength: Infinity,
-                url: `http://127.0.0.1:8000/api/deleteTransaction/${id}`,
+                url: `https://back.koulchinet.com/api/deleteTransaction/${id}`,
             };
 
             axios.request(config)

@@ -23,7 +23,7 @@ export default function Marketplace() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/products');
+      const response = await axios.get('https://back.koulchinet.com/api/products');
       setProducts(response.data.data);
       setLoading(false);
     } catch (err) {
@@ -46,7 +46,7 @@ export default function Marketplace() {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'http://127.0.0.1:8000/api/services',
+            url: 'https://back.koulchinet.com/api/services',
             headers: { }
           };
 
@@ -160,7 +160,7 @@ export default function Marketplace() {
                     <div className="h-48 bg-[#e9edf3] flex items-center justify-center">
                       {product.image ? (
                         <img
-                          src={`http://127.0.0.1:8000/${product.image}`}
+                          src={`https://back.koulchinet.com//${product.image}`}
                           alt={product.name}
                           className="h-full w-full object-cover"
                         />

@@ -19,7 +19,7 @@ export default function GestionClient() {
 
       const getClients = async (page) => {
         try {
-          const response = await axios.get(`http://127.0.0.1:8000/api/getclients?page=${page}`);
+          const response = await axios.get(`https://back.koulchinet.com/api/getclients?page=${page}`);
           setClients(response.data.data); // Access the "data" key
           setTotalPages(response.data.last_page); // Access "last_page" for total pages
         } catch (error) {

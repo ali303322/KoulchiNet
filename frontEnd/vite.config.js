@@ -5,14 +5,14 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
     plugins: [react()],
     build: {
-        outDir: '../public', // Outputs React build to Laravel's public directory
+        outDir: 'build', // Outputs React build to a separate folder
         emptyOutDir: true,
-        base : '/KoulshiNet/',
+        base: '/KoulchiNet/',
     },
     server: {
         port: 3000, // React development server port
-        proxy: {
-            '/api': 'http://127.0.0.1:8000', // Proxy Laravel API requests
-        },
+        // proxy: {
+        //     '/api': 'http://back.koulchinet.com/', // Proxy Laravel API requests
+        // },
     },
 })

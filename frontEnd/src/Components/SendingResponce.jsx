@@ -70,7 +70,7 @@ export default function SendingResponce() {
             //   console.log("Données envoyées:", requestData);
 
               const response = await axios.post(
-                "http://localhost:8000/api/createhistory", // URL
+                "https://back.koulchinet.com/api/createhistory", // URL
                 requestData, // Payload
                 {
                   headers: {
@@ -109,7 +109,7 @@ export default function SendingResponce() {
         {/* Success Icon */}
         <svg
           className="w-16 h-16 mx-auto text-green-500 animate-bounce"
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns="https://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
         >
@@ -138,7 +138,7 @@ export default function SendingResponce() {
                   files.map((image, index) => (
                     <img
                       key={index}
-                      src={`http://127.0.0.1:8000/${image}`}
+                      src={`https://back.koulchinet.com/${image}`}
                       alt={`Image ${index + 1}`}
                       className="w-32 h-32 object-cover rounded-lg shadow-md"
                     />

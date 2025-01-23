@@ -55,7 +55,7 @@ const number = parseInt(planCredits.split(' ')[0], 10);
     data.append('prix', price);
     data.append('file', selectedFile);
 
-    axios.post('http://127.0.0.1:8000/api/store-paiment', data)
+    axios.post('https://back.koulchinet.com/api/store-paiment', data)
       .then((response) => {
         // Extracting message from the response
         if (response.data && response.data.message) {

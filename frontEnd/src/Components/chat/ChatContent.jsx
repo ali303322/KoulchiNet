@@ -273,7 +273,7 @@ export default function ChatContent({ conversation, role, userId , audioBlob}) {
       console.log('cc',audioFile);
 
       const response = await axios.post(
-        "http://localhost:8000/api/send-message",
+        "https://back.koulchinet.com/api/send-message",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -310,7 +310,7 @@ export default function ChatContent({ conversation, role, userId , audioBlob}) {
       console.log('cc',selectedFile);
 
       const response = axios.post(
-        "http://localhost:8000/api/send-message",
+        "https://back.koulchinet.com/api/send-message",
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -363,7 +363,7 @@ export default function ChatContent({ conversation, role, userId , audioBlob}) {
       if (selectedFile) formData.append("file", selectedFile);
       if (selectedAudio) formData.append("audio", selectedAudio);
 
-      const response = await axios.post("http://localhost:8000/api/send-message", formData, {
+      const response = await axios.post("https://back.koulchinet.com/api/send-message", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

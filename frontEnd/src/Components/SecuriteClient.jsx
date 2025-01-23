@@ -41,7 +41,7 @@ export default function SecuriteClient() {
 
     try {
         const response = await axios.post(
-          'http://127.0.0.1:8000/api/checkIfClientExists',
+          'https://back.koulchinet.com/api/checkIfClientExists',
           {},
           {
             headers: {
@@ -92,7 +92,7 @@ export default function SecuriteClient() {
 
         axios
           .post(
-            `http://127.0.0.1:8000/api/client/${client.id}/change-password`,
+            `https://back.koulchinet.com/api/client/${client.id}/change-password`,
             {
               password_actuel: currentPassword,
               password_nouveau: newPassword,

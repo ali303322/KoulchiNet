@@ -12,7 +12,7 @@ export default function ForgotPassword() {
     setSuccess(null);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/forgot-password', { email });
+      const response = await axios.post('https://back.koulchinet.com/api/forgot-password', { email });
       setSuccess('Vérifiez votre email pour changer votre mot de passe.');
     } catch (err) {
       if (err.response && err.response.status === 404) {

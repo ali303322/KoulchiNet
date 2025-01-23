@@ -30,7 +30,7 @@ export default function GestionContenu() {
   // Function to fetch categories data with pagination
   const fetchCategories = (page = 1) => {
     axios
-      .get(`http://127.0.0.1:8000/api/categoriesWithPaginate?page=${page}`)
+      .get(`https://back.koulchinet.com/api/categoriesWithPaginate?page=${page}`)
       .then((response) => {
         // Ensure response has the expected structure and set categories state
         if (response.data && response.data.data) {
@@ -63,7 +63,7 @@ export default function GestionContenu() {
 
     // console.log(data.get('icon'));
 
-    axios.post('http://127.0.0.1:8000/api/AddCategories', data, {
+    axios.post('https://back.koulchinet.com/api/AddCategories', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -88,7 +88,7 @@ const submitDelete = (id) => {
         console.log(`Deleting category with ID: ${id}`); // Log the ID being passed
 
         // Make the DELETE request to the backend API
-        axios.delete(`http://127.0.0.1:8000/api/supprimerCategorie/${id}`)
+        axios.delete(`https://back.koulchinet.com/api/supprimerCategorie/${id}`)
             .then((response) => {
                 alert("La catégorie a été bien supprimée.");
                 window.location.reload();

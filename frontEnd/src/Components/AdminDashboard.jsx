@@ -15,7 +15,7 @@ export default function AdminDashboard() {
 
   const fetchPrestataires = (page) => {
     axios
-      .get(`http://127.0.0.1:8000/api/getAllPrestataire?page=${page}`)
+      .get(`https://back.koulchinet.com/api/getAllPrestataire?page=${page}`)
       .then((res) => {
         setPrestataire(res.data.prestataire);
         setTotalPages(res.data.totalPages); // Ensure your API returns total pages

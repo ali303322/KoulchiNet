@@ -17,7 +17,7 @@ export default function DetailsContenu() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/categorieServices/${id}?page=${currentPage}&limit=${itemsPerPage}`);
+                const response = await axios.get(`http://back.koulchinet.com/api/categorieServices/${id}?page=${currentPage}&limit=${itemsPerPage}`);
                 setSousService(response.data.data); // Assuming the data is in 'data'
                 setTotalPages(response.data.total_pages); // Assuming the total pages info is in 'total_pages'
             } catch (error) {
@@ -44,7 +44,7 @@ export default function DetailsContenu() {
             console.log(`Deleting category with ID: ${id}`); // Log the ID being passed
 
             // Make the DELETE request to the backend API
-            axios.delete(`http://127.0.0.1:8000/api/supprimerService/${id}`)
+            axios.delete(`http://back.koulchinet.com/api/supprimerService/${id}`)
                 .then((response) => {
                     alert("La catégorie a été bien supprimée.");
                     window.location.reload();

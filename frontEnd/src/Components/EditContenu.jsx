@@ -32,7 +32,7 @@ export default function EditContenu() {
 
     const showService = async (id) => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/Edit-service-content/${id}`);
+        const response = await fetch(`https://back.koulchinet.com/api/Edit-service-content/${id}`);
 
         if (!response.ok) {
           throw new Error('Failed to fetch service data');
@@ -201,7 +201,7 @@ export default function EditContenu() {
 
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/update-service-content/${id}`,
+                `https://back.koulchinet.com/api/update-service-content/${id}`,
                 formData,
                 {
                     headers: {
@@ -361,7 +361,7 @@ console.log(aventages);
   {image && (
     <div className="mt-4">
       <img
-        src={image.startsWith('http') ? image : `http://127.0.0.1:8000/${image}`}
+        src={image.startsWith('https') ? image : `https://back.koulchinet.com/${image}`}
         alt="Selected"
         className="w-20 h-auto rounded"
       />
@@ -390,7 +390,7 @@ console.log(aventages);
   {icon && (
     <div className="mt-4">
       <img
-        src={icon.startsWith('http') ? icon : `http://127.0.0.1:8000/${icon}`}
+        src={icon.startsWith('https') ? icon : `https://back.koulchinet.com/${icon}`}
         alt="Selected"
         className="w-20 h-auto rounded"
       />
@@ -421,7 +421,7 @@ console.log(aventages);
   {avImage && (
     <div className="mt-4">
       <img
-        src={avImage.startsWith('http') ? avImage : `http://127.0.0.1:8000/${avImage}`}
+        src={avImage.startsWith('https') ? avImage : `https://back.koulchinet.com/${avImage}`}
         alt="Selected"
         className="w-20 h-auto rounded"
       />
@@ -483,7 +483,7 @@ console.log(aventages);
   {ImageTypeServices && (
     <div className="mt-4">
       <img
-        src={ImageTypeServices.startsWith('http') ? ImageTypeServices : `http://127.0.0.1:8000/${ImageTypeServices}`}
+        src={ImageTypeServices.startsWith('https') ? ImageTypeServices : `https://back.koulchinet.com/${ImageTypeServices}`}
         alt="Selected"
         className="w-20 h-auto rounded"
       />

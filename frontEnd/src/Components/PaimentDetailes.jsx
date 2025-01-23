@@ -12,7 +12,7 @@ export default function PaimentDetailes() {
     // const { id } = location.state || {}
     const {id} = useParams();
     useEffect(()=>{
-        axios.get("http://127.0.0.1:8000/api/getPaiment/"+id)
+        axios.get("https://back.koulchinet.com/api/getPaiment/"+id)
       .then(res=>{
         setPrestataire(res.data.demande[0]);
         setDocument(res.data.prestataireDoc[0]);
@@ -32,7 +32,7 @@ export default function PaimentDetailes() {
       formData.append('idPres',prestataire.prestataire.id);
       formData.append('NbrOffres',prestataire.NbrOffres);
       if (isConfirmed) {
-       axios.post("http://127.0.0.1:8000/api/ApproverPrestataire",formData)
+       axios.post("https://back.koulchinet.com/api/ApproverPrestataire",formData)
        .then(res=>{
         alert(res.data.message)
         window.history.back();
@@ -57,7 +57,7 @@ export default function PaimentDetailes() {
           <div className="flex items-start space-x-8">
             {/* Profile Image */}
             <div className="w-32 h-32 rounded-full overflow-hidden bg-pink-200 flex-shrink-0">
-              <img src={`http://127.0.0.1:8000/profile_photos_perstataire/${document && document.photo}`} alt="Profile" className="w-full h-full object-cover" />
+              <img src={`https://back.koulchinet.com/profile_photos_perstataire/${document && document.photo}`} alt="Profile" className="w-full h-full object-cover" />
             </div>
 
             {/* User Details */}
@@ -104,7 +104,7 @@ export default function PaimentDetailes() {
 
         <div >
             <iframe
-              src={`http://127.0.0.1:8000/`+prestataire.recipteImage}
+              src={`https://back.koulchinet.com/`+prestataire.recipteImage}
               title="PDF Viewer"
              width={421}
              height={400}

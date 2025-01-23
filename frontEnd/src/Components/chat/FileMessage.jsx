@@ -11,13 +11,13 @@ export default function FileMessage({ fileName, fileSize, fileUrl }) {
   };
 
 
-  console.log('cc',`http://127.0.0.1:8000/${fileUrl}`);
+  console.log('cc',`https://back.koulchinet.com/${fileUrl}`);
 
 
   return (
 
     <div className="flex items-center space-x-2 bg-gray-100 p-2 rounded-lg">
-        <img src={`http://127.0.0.1:8000/${fileUrl}`} alt="" />
+        <img src={`https://back.koulchinet.com/${fileUrl}`} alt="" />
     {/* <a
         href={`http://127.0.0.1:8000/${fileUrl}`}>
       <div className="flex-grow">

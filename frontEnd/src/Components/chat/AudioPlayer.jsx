@@ -89,7 +89,7 @@ export default function AudioPlayer({ audioUrl }) {
         </div>
       </div>
 
-      <audio ref={audioRef} src={`http://127.0.0.1:8000/${audioUrl}`} onEnded={() => setIsPlaying(false)} />
+      <audio ref={audioRef} src={`https://back.koulchinet.com/${audioUrl}`} onEnded={() => setIsPlaying(false)} />
     </div>
   );
 }

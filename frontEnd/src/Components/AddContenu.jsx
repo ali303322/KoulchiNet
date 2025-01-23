@@ -176,7 +176,7 @@ export default function AddContenu() {
 
 
     // // Axios request
-    axios.post('http://127.0.0.1:8000/api/addServiceAndContent', formData)
+    axios.post('https://back.koulchinet.com/api/addServiceAndContent', formData)
         .then(response => {
             console.log('Service stored successfully:', response.data);
             alert("service crée avec succes");

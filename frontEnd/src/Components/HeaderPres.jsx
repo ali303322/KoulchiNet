@@ -37,7 +37,7 @@ export default function HeaderPres() {
 
     const fetchUserData = async (id) => {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/api/prestataire/${id}`);
+          const response = await fetch(`https://back.koulchinet.com/api/prestataire/${id}`);
           const data = await response.json();
           setPresData(data);
           // console.log(data);
@@ -78,7 +78,7 @@ export default function HeaderPres() {
               <img
                 src={KoulshiNet}
                 alt="Koulchinet.com"
-                className="h-[150px] w-auto absolute left-0 object-contain
+                className="h-[70px] w-auto absolute left-0 object-contain
                 filter contrast-125 brightness-105
                 [image-rendering:crisp-edges]
                 [image-rendering:-webkit-optimize-contrast]"
@@ -132,7 +132,7 @@ export default function HeaderPres() {
               <div className="relative flex items-center space-x-3">
                 {presData?.documents?.[0]?.photo ? (
                     <img
-                    src={`http://127.0.0.1:8000/profile_photos_perstataire/${presData.documents[0].photo}`}
+                    src={`https://back.koulchinet.com/profile_photos_perstataire/${presData.documents[0].photo}`}
                     alt="Profile"
                     className="w-16 h-16 rounded-full object-cover"
                     />
